@@ -21,26 +21,26 @@ public class ManageTabsActivity extends TabActivity {
         
         // Tab for cajeros en general
         TabSpec generalCajeros = tabHost.newTabSpec("Todos los cajeros");
-        generalCajeros.setIndicator("Cajeros", getResources().getDrawable(R.drawable.ic_launcher));
+        generalCajeros.setIndicator("Cajeros", getResources().getDrawable(R.drawable.icon_photos_tab));
         Intent generalIntent = new Intent(this, AllCajerosActivity.class);
         generalCajeros.setContent(generalIntent);
         
         // Tab for cajeros Banelco
         TabSpec cajerosBanelco = tabHost.newTabSpec("Banelco");
         // setting Title and Icon for the Tab
-        cajerosBanelco.setIndicator("Banelco", getResources().getDrawable(R.drawable.ic_launcher));
+        cajerosBanelco.setIndicator("Banelco", getResources().getDrawable(R.drawable.icon_songs_tab));
         Intent banelcoIntent = new Intent(this, CajerosBanelcoActivity.class);
         cajerosBanelco.setContent(banelcoIntent);
         
         // Tab for cajeros Red Link
         TabSpec cajerosLink = tabHost.newTabSpec("Red Link");
-        cajerosLink.setIndicator("Red Link", getResources().getDrawable(R.drawable.ic_launcher));
+        cajerosLink.setIndicator("Red Link", getResources().getDrawable(R.drawable.icon_videos_tab));
         Intent redLinkIntent = new Intent(this, CajerosLinkActivity.class);
         cajerosLink.setContent(redLinkIntent);
         
      // Tab for CreditosActivity
         TabSpec creditos = tabHost.newTabSpec("CreditosActivity");
-        creditos.setIndicator("CreditosActivity", getResources().getDrawable(R.drawable.ic_launcher));
+        creditos.setIndicator("CreditosActivity", getResources().getDrawable(R.drawable.icon_photos_tab));
         Intent creditosIntent = new Intent(this, CreditosActivity.class);
         creditos.setContent(creditosIntent);
         
