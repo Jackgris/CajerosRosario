@@ -1,7 +1,5 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
-import com.example.banco.de.rosario.R;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
