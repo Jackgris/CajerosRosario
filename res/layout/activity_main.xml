@@ -1,14 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+<TabHost android:id="@android:id/tabhost" 
+		 android:layout_width="match_parent" 
+		 android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TabWidget  android:layout_width="match_parent" 
+	     			android:layout_height="wrap_content" 
+	     			android:id="@android:id/tabs">
+            <FrameLayout android:layout_width="match_parent" 
+	     			  android:layout_height="match_parent" 
+	     			  android:id="@android:id/tabcontent">
+                
+            </FrameLayout>
+        </TabWidget>
+    </LinearLayout>
+    
+</TabHost>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
 
-</RelativeLayout>
+</LinearLayout>
