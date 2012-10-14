@@ -6,6 +6,9 @@ package com.aprendiendodeandroid.bancos.rosario;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -50,6 +53,26 @@ public class ManageTabsActivity extends TabActivity {
         tabHost.addTab(cajerosLink); // Adding link tab
         tabHost.addTab(creditos); // Adding creditos tab
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.menu.options_menu:
+                startActivity(new Intent(this, EditPreferences.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

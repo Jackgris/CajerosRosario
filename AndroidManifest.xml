@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aprendiendodeandroid.bancos.rosario"
     android:versionCode="1"
@@ -11,18 +12,21 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".ManageTabsActivity"
-            android:label="@string/title_activity_main" >
+        
+        <activity android:name=".SplasScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
+        <activity android:name=".ManageTabsActivity"
+                  android:label="@string/title_activity_main" >
+                    </activity>
+
         <activity android:name=".AllCajerosActivity"/>
         <activity android:name=".CajerosBanelcoActivity"/>
         <activity android:name=".CajerosLinkActivity"/>
+        <activity android:name=".EditPreferences"/>
         <activity android:name=".CreditosActivity"/>
     </application>
 

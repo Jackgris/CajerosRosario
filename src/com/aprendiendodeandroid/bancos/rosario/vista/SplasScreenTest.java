@@ -1,4 +1,4 @@
-package com.aprendiendodeandroid.bancos.rosario;
+package com.aprendiendodeandroid.bancos.rosario.vista;
 
 import com.aprendiendodeandroid.bancos.rosario.ManageTabsActivity;
 import com.aprendiendodeandroid.bancos.rosario.R;
@@ -10,9 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 
-
-public class SplassScreen extends Activity{
-
+public class SplasScreenTest extends Activity{
 
 	// Set the display time, in milliseconds (or extract it out as a configurable parameter)
     private final int SPLASH_DISPLAY_LENGTH = 3000;
@@ -39,10 +37,10 @@ public class SplassScreen extends Activity{
                 public void run()
                 {
                     //Finish the splash activity so it can't be returned to.
-                    SplassScreen.this.finish();
+                    SplasScreenTest.this.finish();
                     // Create an Intent that will start the main activity.
-                    Intent mainIntent = new Intent(SplassScreen.this, ManageTabsActivity.class);
-                    SplassScreen.this.startActivity(mainIntent);
+                    Intent mainIntent = new Intent(SplasScreenTest.this, ManageTabsActivity.class);
+                    SplasScreenTest.this.startActivity(mainIntent);
                 }
             }, SPLASH_DISPLAY_LENGTH);
         }
@@ -50,10 +48,9 @@ public class SplassScreen extends Activity{
         {
             // if the splash is not enabled, then finish the activity immediately and go to main.
             finish();
-            Intent mainIntent = new Intent(SplassScreen.this, ManageTabsActivity.class);
-            SplassScreen.this.startActivity(mainIntent);
+            Intent mainIntent = new Intent(SplasScreenTest.this, ManageTabsActivity.class);
+            SplasScreenTest.this.startActivity(mainIntent);
         }
     }
-
 
 }

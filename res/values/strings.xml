@@ -6,5 +6,7 @@
     <string name="title_activity_main">Cajeros de la ciudad de Rosario</string>
     <string name="tab1">Esta es la tab uno</string>
     <string name="tab2">Esta es la tab dos</string>
+    <string name="textoSplash">Testeo del SplashScreen</string>
+    <string name="TODO">TODO</string>
 
 </resources>
