@@ -1,12 +1,10 @@
 <resources>
-
-    <string name="app_name">CajerosRosario2</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Cajeros de la ciudad de Rosario</string>
     <string name="tab1">Esta es la tab uno</string>
     <string name="tab2">Esta es la tab dos</string>
     <string name="textoSplash">Testeo del SplashScreen</string>
     <string name="TODO">TODO</string>
-
-</resources>
+    <string name="app_name">CajerosRosario</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+  </resources>
