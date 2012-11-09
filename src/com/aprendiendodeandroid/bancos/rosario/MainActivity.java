@@ -1,10 +1,10 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
-import com.example.banco.de.rosario.R;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v4.app.NavUtils;
 
 public class MainActivity extends Activity {
 
@@ -19,4 +19,6 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+
+    
 }
