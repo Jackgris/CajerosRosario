@@ -9,28 +9,29 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="8" />
 
+     <uses-permission android:name="android.permission.INTERNET"/>
+    
     <application
         android:icon="@drawable/android"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <uses-library android:name="com.google.android.maps" />
         
-        <activity android:name=".SplasScreen">
+        <activity android:name=".ManageTabsActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-        <activity android:name=".ManageTabsActivity"
-                  android:label="@string/title_activity_main" />
-                   
+        <activity android:name=".CajerosBanelcoActivity"/>    
         <activity android:name=".AllCajerosActivity"/>
-        <activity android:name=".CajerosBanelcoActivity"/>
         <activity android:name=".CajerosLinkActivity"/>
         <activity android:name=".EditPreferences"/>
         <activity android:name=".CreditosActivity"/>
         <activity android:name=".MapaGeneral"/>
-      
+   
+        
     </application>
-
+   
 </manifest>
