@@ -13,6 +13,7 @@
         android:icon="@drawable/android"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <uses-library android:name="com.google.android.maps" />
         
         <activity android:name=".SplasScreen">
             <intent-filter>
@@ -28,6 +29,7 @@
         <activity android:name=".CajerosLinkActivity"/>
         <activity android:name=".EditPreferences"/>
         <activity android:name=".CreditosActivity"/>
+        <activity android:name=".MapaGeneral"/>
       
     </application>
 
