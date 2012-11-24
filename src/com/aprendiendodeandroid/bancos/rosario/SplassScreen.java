@@ -1,5 +1,6 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
+<<<<<<< HEAD
 import com.aprendiendodeandroid.bancos.rosario.ManageTabsActivity;
 import com.aprendiendodeandroid.bancos.rosario.R;
 
@@ -54,6 +55,64 @@ public class SplassScreen extends Activity{
             SplassScreen.this.startActivity(mainIntent);
         }
     }
+=======
+//import org.michenux.android.init.AppInit;
+
+import com.aprendiendodeandroid.bancos.rosario.R;
+>>>>>>> primerosCambios
+
+import roboguice.activity.RoboFragmentActivity;
+import roboguice.inject.ContentView;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 
 
+@ContentView(R.layout.fragment)
+public class SplassScreen extends RoboFragmentActivity{
+
+	 protected MyStateSaver data;
+
+	    @Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+
+	        this.data = (MyStateSaver) getLastCustomNonConfigurationInstance();
+	        if (this.data == null) {
+	            this.data = new MyStateSaver();
+	        }
+	        if (this.data.doInit) {
+	            doInit();
+	        }
+	    }
+
+	    @Override
+	    public Object onRetainCustomNonConfigurationInstance() {
+	        return this.data;
+	    }
+
+	    protected void startNextActivity() {
+	        Intent intent = new Intent(SplassScreen.this, ManageTabsActivity.class);
+	        this.startActivity(intent);
+	        this.finish();
+	    }
+
+	    protected void doInit() {
+	        this.data.doInit = false;
+	        final Handler handler = new Handler();
+	        handler.postDelayed(new Runnable() {
+	            public void run() {
+	                try {
+	                    //TODO: Your application init goes here.
+	                    startNextActivity();
+	                } catch( Exception e ) {
+	                    throw new RuntimeException(e);
+	                }
+	            }
+	        }, 2000);
+	    }
+
+	    private class MyStateSaver {
+	        public boolean doInit = true;
+	    }
 }

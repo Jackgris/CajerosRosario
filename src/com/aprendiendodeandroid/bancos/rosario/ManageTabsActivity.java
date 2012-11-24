@@ -54,7 +54,11 @@ public class ManageTabsActivity extends TabActivity {
         tabHost.addTab(creditos); // Adding creditos tab
     }
     
+<<<<<<< HEAD
     @Override
+=======
+/*    @Override
+>>>>>>> primerosCambios
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -74,5 +78,9 @@ public class ManageTabsActivity extends TabActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> primerosCambios
 }
