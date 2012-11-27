@@ -1,8 +1,6 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
 
-import com.aprendiendodeandroid.bancos.rosario.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -15,3 +13,4 @@ public class AllCajerosActivity extends Activity {
 		setContentView(R.layout.cajeros);
 	}
 }
+//

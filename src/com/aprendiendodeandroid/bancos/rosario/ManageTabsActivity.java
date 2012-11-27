@@ -47,14 +47,23 @@ public class ManageTabsActivity extends TabActivity {
         Intent creditosIntent = new Intent(this, CreditosActivity.class);
         creditos.setContent(creditosIntent);
         
+     // Tab for Mapa General
+        TabSpec mapageneral = tabHost.newTabSpec("MapaGeneral");
+        mapageneral.setIndicator("MapaGeneral", getResources().getDrawable(R.drawable.icon_photos_tab));
+        Intent mapaIntent = new Intent(this, MapaGeneral.class);
+        mapageneral.setContent(mapaIntent);
+        
         // Adding all TabSpec to TabHost
         tabHost.addTab(generalCajeros); // Adding general tab
         tabHost.addTab(cajerosBanelco); // Adding banelco tab
         tabHost.addTab(cajerosLink); // Adding link tab
         tabHost.addTab(creditos); // Adding creditos tab
+        tabHost.addTab(mapageneral); // Adding mapa general
     }
     
-    @Override
+
+/*    @Override
+>>>>>>> primerosCambios
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -74,5 +83,9 @@ public class ManageTabsActivity extends TabActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+<<<<<<< HEAD
+
+=======
+*/
 
 }
