@@ -14,15 +14,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
-        <activity android:name=".SplasScreen">
+        <!--  <activity android:name=".SplasScreen">-->
+        <activity android:name=".ManageTabsActivity">
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
+        <!-- 
         <activity android:name=".ManageTabsActivity"
                   android:label="@string/title_activity_main" />
-                   
+              -->      
         <activity android:name=".AllCajerosActivity"/>
         <activity android:name=".CajerosBanelcoActivity"/>
         <activity android:name=".CajerosLinkActivity"/>

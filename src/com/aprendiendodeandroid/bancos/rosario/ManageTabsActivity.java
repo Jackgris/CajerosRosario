@@ -42,8 +42,8 @@ public class ManageTabsActivity extends TabActivity {
         cajerosLink.setContent(redLinkIntent);
         
      // Tab for CreditosActivity
-        TabSpec creditos = tabHost.newTabSpec("CreditosActivity");
-        creditos.setIndicator("CreditosActivity", getResources().getDrawable(R.drawable.icon_photos_tab));
+        TabSpec creditos = tabHost.newTabSpec("Creditos");
+        creditos.setIndicator("Creditos", getResources().getDrawable(R.drawable.icon_photos_tab));
         Intent creditosIntent = new Intent(this, CreditosActivity.class);
         creditos.setContent(creditosIntent);
         
