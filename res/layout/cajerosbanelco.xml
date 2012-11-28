@@ -8,6 +8,12 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tab2" />
+        android:text="@string/banelco" />
+
+    <ExpandableListView
+        android:id="@+id/expandableListBanelco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ExpandableListView>
 
 </LinearLayout>

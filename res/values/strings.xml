@@ -7,4 +7,11 @@
     <string name="app_name">CajerosRosario</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="primeradescricion">Esta va a ser una breve descipcion de la aplicacion, con su funcionamiento y algunos consejos</string>
+    <string name="create">create by jackgris</string>
+    <string name="otradescipcion">Despues de una breve imagen aqui se va a colocar otra descripcion, la imagen debera estar relacionada con algo</string>
+    <string name="reloj">Reloj Digital</string>
+    <string name="creditos">Este va a ser un pequenio texto donde se van a introducir los creditos</string>
+    <string name="redlink">Esta es la lista de cajeros de la Red Link</string>
+    <string name="banelco">Esta es la lista de cajeros de Banelco</string>
   </resources>
