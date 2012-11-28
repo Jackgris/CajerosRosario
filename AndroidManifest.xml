@@ -5,39 +5,24 @@
     android:versionName="1.0" >
 
     <uses-sdk
-
         android:minSdkVersion="8"
         android:targetSdkVersion="8" />
-
      <uses-permission android:name="android.permission.INTERNET"/>
     
     <application
         android:icon="@drawable/android"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <uses-library android:name="com.google.android.maps" />
         
-<<<<<<< HEAD
-        <!--  <activity android:name=".SplasScreen">-->
-        <activity android:name=".ManageTabsActivity">
-            
-=======
+        <uses-library android:name="com.google.android.maps" />
         <activity android:name=".ManageTabsActivity"
             android:label="@string/title_activity_main">
->>>>>>> 0444a3b6d5c07eee3d1566d5aec627d8ad618646
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <!-- 
-        <activity android:name=".ManageTabsActivity"
-                  android:label="@string/title_activity_main" />
-              -->      
-=======
-        <activity android:name=".CajerosBanelcoActivity"/>    
->>>>>>> 0444a3b6d5c07eee3d1566d5aec627d8ad618646
+        <activity android:name=".SplasScreen"/>
         <activity android:name=".AllCajerosActivity"/>
         <activity android:name=".CajerosLinkActivity"/>
         <activity android:name=".EditPreferences"/>
