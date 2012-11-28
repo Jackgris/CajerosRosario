@@ -18,6 +18,7 @@ public class MapaGeneral extends MapActivity {
 		mapageneral = (MapView)findViewById(R.id.mapageneral);
 		
 		mapageneral.setBuiltInZoomControls(true);
+		mapageneral.setStreetView(true);
 		
 	}
 	
