@@ -1,6 +1,7 @@
 package com.aprendiendodeandroid.bancos.rosario.vista;
 
 import com.aprendiendodeandroid.bancos.rosario.ManageTabsActivity;
+import com.aprendiendodeandroid.bancos.rosario.R;
 
 
 import android.app.Activity;
@@ -9,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import com.aprendiendodeandroid.bancos.rosario.R;
 
 public class SplasScreenTest extends Activity{
 
