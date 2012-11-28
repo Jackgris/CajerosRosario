@@ -16,3 +16,18 @@ Incluimos un diseño xml de ejemplo para que puedas iniciarte en los secretos de
                  android:layout_height="fill_parent"
                  android:apiKey="0rxZX0FYky7J1wL7tq5UZokXV6JsQXtCBA54ezw"
                  />
+
+                 
+                 
+Gracias por suscribirte a la clave del API de Android Maps.
+Tu clave es:
+0rxZX0FYky7JoKXXuwPpiwdcJJL6Xre_xsF78hg
+Esta clave es válida para todas las aplicaciones firmadas con el certificado cuya huella dactilar es:
+2E:48:58:CF:A6:66:AA:01:80:87:67:C6:9F:92:AC:FD
+Incluimos un diseño xml de ejemplo para que puedas iniciarte en los secretos de la creación de mapas:
+              <com.google.android.maps.MapView
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="0rxZX0FYky7JoKXXuwPpiwdcJJL6Xre_xsF78hg"
+                 />
+            

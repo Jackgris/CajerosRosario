@@ -7,7 +7,7 @@ import com.google.android.maps.MapView;
 
 public class MapaGeneral extends MapActivity {
 
-	private MapView mapageneral;
+	private MapView mapageneral = null;
 	
 	@Override
 	protected void onCreate(Bundle icicle) {
@@ -23,7 +23,7 @@ public class MapaGeneral extends MapActivity {
 	
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
