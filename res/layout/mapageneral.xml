@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <com.google.android.maps.MapView
+  <com.google.android.maps.MapView
         android:id="@+id/mapageneral"
         android:layout_width="fill_parent"
  		android:layout_height="fill_parent"
@@ -12,4 +12,10 @@
  		android:apiKey="0rxZX0FYky7JoKXXuwPpiwdcJJL6Xre_xsF78hg"
         />
 
-</LinearLayout>
+ 
+</LinearLayout> -->
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/map"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+class="com.google.android.gms.maps.SupportMapFragment"/>
