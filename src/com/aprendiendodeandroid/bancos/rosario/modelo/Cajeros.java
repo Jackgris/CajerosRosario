@@ -1,6 +1,6 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
-public class CajerosBD {
+public class Cajeros {
 
 	private String direccion;
 	private String telefonoBanco;
@@ -8,9 +8,7 @@ public class CajerosBD {
 	private int latitud;
 	private String nombreBanco;
 	private boolean tipoCajero;
-	
-	
-	
+		
 	public String getDireccion() {
 		return direccion;
 	}
@@ -47,6 +45,4 @@ public class CajerosBD {
 	public void setTipoCajero(boolean tipoCajero) {
 		this.tipoCajero = tipoCajero;
 	}
-	
-	
 }

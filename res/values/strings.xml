@@ -14,4 +14,9 @@
     <string name="creditos">Este va a ser un pequenio texto donde se van a introducir los creditos</string>
     <string name="redlink">Esta es la lista de cajeros de la Red Link</string>
     <string name="banelco">Esta es la lista de cajeros de Banelco</string>
+    <string name="enable_gps">Enable GPS</string>
+    <string name="enable_gps_dialog">GPS provider not enabled. Would you like to enable it?</string>
+    <string name="unknown">--Unknown--</string>
+    <string name="not_support_gps">GPS provider not supported</string>
+    <string name="not_support_network">Network provider not supported</string>
   </resources>
