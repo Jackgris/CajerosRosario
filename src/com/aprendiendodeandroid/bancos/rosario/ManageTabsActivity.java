@@ -21,7 +21,7 @@ public class ManageTabsActivity extends TabActivity {
         
         // Tab for cajeros en general
         TabSpec generalCajeros = tabHost.newTabSpec("Todos los cajeros");
-        generalCajeros.setIndicator("Cajeros", getResources().getDrawable(R.drawable.icon_photos_tab));
+        generalCajeros.setIndicator("Descripcion", getResources().getDrawable(R.drawable.icon_photos_tab));
         Intent generalIntent = new Intent(this, AllCajerosActivity.class);
         generalCajeros.setContent(generalIntent);
         
@@ -46,13 +46,13 @@ public class ManageTabsActivity extends TabActivity {
         
      // Tab for Mapa General
         TabSpec mapageneral = tabHost.newTabSpec("MapaGeneral");
-        mapageneral.setIndicator("MapaGeneral", getResources().getDrawable(R.drawable.icon_photos_tab));
+        mapageneral.setIndicator("Mapa General", getResources().getDrawable(R.drawable.icon_photos_tab));
         Intent mapaIntent = new Intent(this, MapaGeneral.class);
         mapageneral.setContent(mapaIntent);
         
         // Adding all TabSpec to TabHost
-        tabHost.addTab(generalCajeros); // Adding general tab
         tabHost.addTab(mapageneral); // Adding mapa general
+        tabHost.addTab(generalCajeros); // Adding general tab
         tabHost.addTab(cajerosBanelco); // Adding banelco tab
         tabHost.addTab(cajerosLink); // Adding link tab
         tabHost.addTab(creditos); // Adding creditos tab

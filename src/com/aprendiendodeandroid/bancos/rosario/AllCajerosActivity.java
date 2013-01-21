@@ -13,4 +13,3 @@ public class AllCajerosActivity extends Activity {
 		setContentView(R.layout.cajeros);
 	}
 }
-//

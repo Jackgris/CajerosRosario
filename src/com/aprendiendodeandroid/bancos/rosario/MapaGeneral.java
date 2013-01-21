@@ -1,22 +1,18 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
-import android.graphics.Color;
-import android.graphics.Point;
+
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
@@ -31,139 +27,96 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	private GoogleMap mapa;
 	static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
 	final float posicionzoomgeneral = 17;
+	LocationManager locationManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mapageneral);
 		
-        // Recuperamos el estado anterior antes de la rotacion del dispositivo (si existio alguno)
-        // if (savedInstanceState != null) {
-        //     useFine = savedInstanceState.getBoolean(KEY_FINE);
-        //     useBoth = savedInstanceState.getBoolean(KEY_BOTH);
-        // } else {
-        //     useFine = false;
-        //     useBoth = false;
-        // }
-        // tomamos una referencia a nuestro location manager
-        // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManager = (LocationManager)this.getSystemService(getApplicationContext().LOCATION_SERVICE);
 		
-		mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa))
-		        .getMap();
-			
-        mapa.setOnMapClickListener(new OnMapClickListener() {
-            public void onMapClick(LatLng point) {
-                Projection proj = mapa.getProjection();
-                Point coord = proj.toScreenLocation(point);
-                
-                Toast.makeText(
-                        MapaGeneral.this, 
-                        "Click\n" + 
-                        "Lat: " + point.latitude + "\n" +
-                        "Lng: " + point.longitude + "\n" +
-                        "X: " + coord.x + " - Y: " + coord.y,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        
-        mapa.setOnMapLongClickListener(new OnMapLongClickListener() {
-            public void onMapLongClick(LatLng point) {
-                Projection proj = mapa.getProjection();
-                Point coord = proj.toScreenLocation(point);
-                
-                Toast.makeText(
-                        MapaGeneral.this, 
-                        "Click Largo\n" + 
-                        "Lat: " + point.latitude + "\n" +
-                        "Lng: " + point.longitude + "\n" +
-                        "X: " + coord.x + " - Y: " + coord.y,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        
-        mapa.setOnCameraChangeListener(new OnCameraChangeListener() {
-            public void onCameraChange(CameraPosition position) {
-                Toast.makeText(
-                        MapaGeneral.this, 
-                        "Cambio Cámara\n" + 
-                        "Lat: " + position.target.latitude + "\n" +
-                        "Lng: " + position.target.longitude + "\n" +
-                        "Zoom: " + position.zoom + "\n" +
-                        "Orientación: " + position.bearing + "\n" +
-                        "Ángulo: " + position.tilt,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        
-        mapa.setOnMarkerClickListener(new OnMarkerClickListener() {
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(
-                        MapaGeneral.this, 
-                        "Marcador pulsado:\n" + 
-                        marker.getTitle(),
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-	}
-	
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
-    {   
-        switch(item.getItemId())
-        {
-            case 2:
-                mostrarMarcador(40.5, -3.5);
-                break;
-            case 1:
-                mostrarLineas();
-                break;
+		mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa)).getMap();
+		
+		Marker actual = mapa.addMarker(new MarkerOptions().position(ROSARIO).title("Rosario")); 
+		init();
         }
-        
-        return super.onOptionsItemSelected(item);
-    }
-    
-    private void mostrarMarcador(double lat, double lng)
-    {
-        mapa.addMarker(new MarkerOptions()
-        .position(new LatLng(lat, lng))
-        .title("Pais: España"));
-    }
-    
-    private void mostrarLineas()
-    {
-        //Dibujo con Lineas
-        
-        PolylineOptions lineas = new PolylineOptions()
-            .add(new LatLng(45.0, -12.0))
-            .add(new LatLng(45.0, 5.0))
-            .add(new LatLng(34.5, 5.0))
-            .add(new LatLng(34.5, -12.0))
-            .add(new LatLng(45.0, -12.0));
+	
+	/** this criteria will settle for less accuracy, high power, and cost */
+	public static Criteria createCoarseCriteria() {
+	 
+	  Criteria c = new Criteria();
+	  c.setAccuracy(Criteria.ACCURACY_COARSE);
+	  c.setAltitudeRequired(false);
+	  c.setBearingRequired(false);
+	  c.setSpeedRequired(false);
+	  c.setCostAllowed(true);
+	  c.setPowerRequirement(Criteria.POWER_HIGH);
+	  return c;
+	 
+	}
+	 
+	/** this criteria needs high accuracy, high power, and cost */
+	public static Criteria createFineCriteria() {
+	 
+	  Criteria c = new Criteria();
+	  c.setAccuracy(Criteria.ACCURACY_FINE);
+	  c.setAltitudeRequired(false);
+	  c.setBearingRequired(false);
+	  c.setSpeedRequired(false);
+	  c.setCostAllowed(true);
+	  c.setPowerRequirement(Criteria.POWER_HIGH);
+	  return c;
+	 
+	}
+	/** 
+	  make sure to call this in the main thread, not a background thread
+	  make sure to call locMgr.removeUpdates(...) when you are done
+	*/
+	public void init(){	 
+	  // get low accuracy provider
+	  LocationProvider low=
+	    locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
+	 
+	  // get high accuracy provider
+	  LocationProvider high=
+	    locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(), false));
+	 
+	  // using low accuracy provider... to listen for updates
+	  locationManager.requestLocationUpdates(low.getName(), 0, 0f,
+	        new LocationListener() {
+	        public void onLocationChanged(Location location) {
+	          // do something here to save this new location
+	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
+	        }
+	        public void onStatusChanged(String s, int i, Bundle bundle) {
+	 
+	        }
+	        public void onProviderEnabled(String s) {
+	           // try switching to a different provider
+	        }
+	        public void onProviderDisabled(String s) {
+	           // try switching to a different provider
+	        }
+	      });
+	 
+	  // using high accuracy provider... to listen for updates
+	  locationManager.requestLocationUpdates(high.getName(), 0, 0f,
+	        new LocationListener() {
+	        public void onLocationChanged(Location location) {
+	          // do something here to save this new location
+	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
+	        }
+	        public void onStatusChanged(String s, int i, Bundle bundle) {
+	 
+	        }
+	        public void onProviderEnabled(String s) {
+	          // try switching to a different provider
+	        }
+	        public void onProviderDisabled(String s) {
+	          // try switching to a different provider
+	        }
+	      });
+	}
 
-        lineas.width(8);
-        lineas.color(Color.RED);
-
-        mapa.addPolyline(lineas);
-        
-        //Dibujo con polígonos
-        
-        //PolygonOptions rectangulo = new PolygonOptions()
-        //              .add(new LatLng(45.0, -12.0),
-        //                 new LatLng(45.0, 5.0),
-        //                 new LatLng(34.5, 5.0),
-        //                 new LatLng(34.5, -12.0),
-        //                 new LatLng(45.0, -12.0));
-        //
-        //rectangulo.strokeWidth(8);
-        //rectangulo.strokeColor(Color.RED);
-        //
-        //mapa.addPolygon(rectangulo);
-    }
 }
