@@ -6,13 +6,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -28,6 +30,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
 	final float posicionzoomgeneral = 17;
 	LocationManager locationManager;
+	Marker actual;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		
 		mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa)).getMap();
 		
-		Marker actual = mapa.addMarker(new MarkerOptions().position(ROSARIO).title("Rosario")); 
 		init();
+//		actual = mapa.addMarker(new MarkerOptions().position(ROSARIO).title("Rosario"));
+//		Log.d("Localizacion", "Ubicacion Rosario: " + ROSARIO.toString());
         }
 	
 	/** this criteria will settle for less accuracy, high power, and cost */
@@ -73,7 +77,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	  make sure to call this in the main thread, not a background thread
 	  make sure to call locMgr.removeUpdates(...) when you are done
 	*/
-	public void init(){	 
+	public void init(){
+	  
 	  // get low accuracy provider
 	  LocationProvider low=
 	    locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
@@ -87,16 +92,31 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	        new LocationListener() {
 	        public void onLocationChanged(Location location) {
 	          // do something here to save this new location
+	          int lat = (int) (location.getLatitude());
+	          int lng = (int) (location.getLongitude());
+	          LatLng latLng = new LatLng(lat, lng);
+	          actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+	          Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
+	                  " logitud: " + lng + "Valor al mapa" + latLng);
 	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
+	          
 	        }
 	        public void onStatusChanged(String s, int i, Bundle bundle) {
 	 
 	        }
-	        public void onProviderEnabled(String s) {
+	        public void onProviderEnabled(String provider) {
 	           // try switching to a different provider
+	           Log.d("Localizacion", "Esta habilitado el proveedor");
+	           Toast.makeText(getApplicationContext(), "Esta  habilitado el proveedor " + provider,
+	                    Toast.LENGTH_SHORT).show();
 	        }
-	        public void onProviderDisabled(String s) {
+	        public void onProviderDisabled(String provider) {
 	           // try switching to a different provider
+	           Log.d("Localizacion", "Esta desabilitado el proveedor");
+	           Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
+	                   + " esta desabilitado", Toast.LENGTH_SHORT).show();
+	           Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	              startActivity(settingsIntent);
 	        }
 	      });
 	 
@@ -104,19 +124,32 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	  locationManager.requestLocationUpdates(high.getName(), 0, 0f,
 	        new LocationListener() {
 	        public void onLocationChanged(Location location) {
-	          // do something here to save this new location
+	            // do something here to save this new location
+	            int lat = (int) (location.getLatitude());
+	            int lng = (int) (location.getLongitude());
+	            LatLng latLng = new LatLng(lat, lng);
+	            actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+	            Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
+	                      " logitud: " + lng + "Valor al mapa" + latLng);
 	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
 	        }
 	        public void onStatusChanged(String s, int i, Bundle bundle) {
 	 
 	        }
-	        public void onProviderEnabled(String s) {
-	          // try switching to a different provider
+	        public void onProviderEnabled(String provider) {
+	            // try switching to a different provider
+	            Log.d("Localizacion", "Esta habilitado el proveedor");
+	            Toast.makeText(getApplicationContext(), "Esta  habilitado el proveedor " + provider,
+	                        Toast.LENGTH_SHORT).show();
 	        }
-	        public void onProviderDisabled(String s) {
+	        public void onProviderDisabled(String provider) {
 	          // try switching to a different provider
+	          Log.d("Localizacion", "Esta desabilitado el proveedor");
+	          Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
+	                  + " esta desabilitado", Toast.LENGTH_SHORT).show();
+	          Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	          startActivity(settingsIntent);
 	        }
 	      });
 	}
-
 }
