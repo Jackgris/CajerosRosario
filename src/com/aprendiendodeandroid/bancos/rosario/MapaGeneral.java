@@ -30,6 +30,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	final float posicionzoomgeneral = 17;
 	LocationManager locationManager;
 	Marker actual;
+	LocationListener locationListenerNET;
+	LocationListener locationListenerGPS;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,66 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		setContentView(R.layout.mapageneral);
 		
 		locationManager = (LocationManager)this.getSystemService(getApplicationContext().LOCATION_SERVICE);
+		locationListenerGPS =
+		        new LocationListener() {
+		        public void onLocationChanged(Location location) {
+		            // aca vamos a realizar una accion al tomar un nuevo valor
+		            float lat = (float) (location.getLatitude());
+		            float lng = (float) (location.getLongitude());
+		            LatLng latLng = new LatLng(lat, lng);
+		            actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+		            Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
+		                      " logitud: " + lng + "Valor al mapa" + latLng);
+		        }
+		        public void onStatusChanged(String s, int i, Bundle bundle) {
+		 
+		        }
+		        public void onProviderEnabled(String provider) {
+		            // vamos a intentar cambiar con otros proveedores
+		            Log.d("Localizacion", "Esta habilitado el proveedor " + provider);
+		        }
+		        public void onProviderDisabled(String provider) {
+		          // vamos a intentar cambiar con otros proveedores
+		          Log.d("Localizacion", "Esta desabilitado el proveedor");
+		          Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
+		                  + " esta desabilitado", Toast.LENGTH_SHORT).show();
+		          Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		          startActivity(settingsIntent);
+		        }
+		      };
+        locationListenerNET = new LocationListener() {
+		        public void onLocationChanged(Location location) {
+		          // aca vamos a realizar una accion al tomar un nuevo valor
+		          float lat = (float) (location.getLatitude());
+		          float lng = (float) (location.getLongitude());
+		          LatLng latLng = new LatLng(lat, lng);
+		          actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+
+		          Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
+		                  " logitud: " + lng + "Valor al mapa" + latLng);		          
+		        }
+		        public void onStatusChanged(String s, int i, Bundle bundle) {
+		 
+		        }
+		        public void onProviderEnabled(String provider) {
+		           // vamos a intentar cambiar con otros proveedores
+		           Log.d("Localizacion", "Esta habilitado el proveedor");
+		        }
+		        public void onProviderDisabled(String provider) {
+		           // vamos a intentar cambiar con otros proveedores
+		           Log.d("Localizacion", "Esta desabilitado el proveedor");
+		           Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
+		                   + " esta desabilitado", Toast.LENGTH_SHORT).show();
+		           Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		              startActivity(settingsIntent);
+		        }
+		      };
 		
 		mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa)).getMap();
 				
 		init();
     }
-	/** this criteria will settle for less accuracy, high power, and cost */
+	/** esta criteria va a tener menos precision, consumir menos energia, y un menor costo */
 	public static Criteria createCoarseCriteria() {
 	 
 	  Criteria c = new Criteria();
@@ -53,9 +109,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	  c.setCostAllowed(true);
 	  c.setPowerRequirement(Criteria.POWER_HIGH);
 	  return c;
-	 
 	}
-	/** this criteria needs high accuracy, high power, and cost */
+	/** esta criteria va a tener una mayor precision, consumir mas energia y un costo mayor*/
 	public static Criteria createFineCriteria() {
 	 
 	  Criteria c = new Criteria();
@@ -66,86 +121,49 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	  c.setCostAllowed(true);
 	  c.setPowerRequirement(Criteria.POWER_HIGH);
 	  return c;
-	 
 	}
 	/** 
-	  make sure to call this in the main thread, not a background thread
-	  make sure to call locMgr.removeUpdates(...) when you are done
+	 hay que asegurarse de usar esta funcion en el hilo principal, y no en un hilo en background 
+	 hay que asegurarse de remover las actualizaciones cuando no se use mas
 	*/
 	public void init(){
-	  
-	  // get low accuracy provider
+	  // baja precision
 	  LocationProvider low=
 	    locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
 	 
-	  // get high accuracy provider
+	  // alta precision
 	  LocationProvider high=
 	    locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(), false));
 	 
-	  // using low accuracy provider... to listen for updates
-	  locationManager.requestLocationUpdates(low.getName(), 0, 0f,
-	        new LocationListener() {
-	        public void onLocationChanged(Location location) {
-	          // do something here to save this new location
-	          float lat = (float) (location.getLatitude());
-	          float lng = (float) (location.getLongitude());
-	          LatLng latLng = new LatLng(lat, lng);
-	          actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+	  // usamos el proveedor de baja precision... y le ponemos el listener para que lo actualice
+	  locationManager.requestLocationUpdates(low.getName(), 0, 0f, locationListenerNET);
 
-	          Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
-	                  " logitud: " + lng + "Valor al mapa" + latLng);
-	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
-	          
-	        }
-	        public void onStatusChanged(String s, int i, Bundle bundle) {
-	 
-	        }
-	        public void onProviderEnabled(String provider) {
-	           // try switching to a different provider
-	           Log.d("Localizacion", "Esta habilitado el proveedor");
-	           Toast.makeText(getApplicationContext(), "Esta  habilitado el proveedor " + provider,
-	                    Toast.LENGTH_SHORT).show();
-	        }
-	        public void onProviderDisabled(String provider) {
-	           // try switching to a different provider
-	           Log.d("Localizacion", "Esta desabilitado el proveedor");
-	           Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
-	                   + " esta desabilitado", Toast.LENGTH_SHORT).show();
-	           Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-	              startActivity(settingsIntent);
-	        }
-	      });
-	 
-	  // using high accuracy provider... to listen for updates
-	  locationManager.requestLocationUpdates(high.getName(), 0, 0f,
-	        new LocationListener() {
-	        public void onLocationChanged(Location location) {
-	            // do something here to save this new location
-	            float lat = (float) (location.getLatitude());
-	            float lng = (float) (location.getLongitude());
-	            LatLng latLng = new LatLng(lat, lng);
-	            actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
-	            Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
-	                      " logitud: " + lng + "Valor al mapa" + latLng);
-	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
-	        }
-	        public void onStatusChanged(String s, int i, Bundle bundle) {
-	 
-	        }
-	        public void onProviderEnabled(String provider) {
-	            // try switching to a different provider
-	            Log.d("Localizacion", "Esta habilitado el proveedor");
-	            Toast.makeText(getApplicationContext(), "Esta  habilitado el proveedor " + provider,
-	                        Toast.LENGTH_SHORT).show();
-	        }
-	        public void onProviderDisabled(String provider) {
-	          // try switching to a different provider
-	          Log.d("Localizacion", "Esta desabilitado el proveedor");
-	          Toast.makeText(getApplicationContext(), "El proveedor de ubicacion " + provider
-	                  + " esta desabilitado", Toast.LENGTH_SHORT).show();
-	          Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-	          startActivity(settingsIntent);
-	        }
-	      });
+	  // usamos el proveedor que tiene mayor precision... le agregamos el listener para actualizar
+	  locationManager.requestLocationUpdates(high.getName(), 0, 0f, locationListenerGPS);			  
+
 	}
+		
+	@Override
+	protected void onStop() {
+		// aca vamos a remover todas las actualizaciones
+		super.onStop();
+		locationManager.removeUpdates(locationListenerGPS);
+		locationManager.removeUpdates(locationListenerNET);
+	}
+	
+	@Override
+	protected void onPause() {
+		// aca vamos a remover todas las actualizaciones
+		super.onPause();
+		locationManager.removeUpdates(locationListenerGPS);
+		locationManager.removeUpdates(locationListenerNET);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		init();
+	}
+	
 }
