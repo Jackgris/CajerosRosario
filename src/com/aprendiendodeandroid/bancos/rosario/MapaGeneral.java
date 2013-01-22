@@ -5,7 +5,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
@@ -40,12 +39,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		locationManager = (LocationManager)this.getSystemService(getApplicationContext().LOCATION_SERVICE);
 		
 		mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa)).getMap();
-		
+				
 		init();
-//		actual = mapa.addMarker(new MarkerOptions().position(ROSARIO).title("Rosario"));
-//		Log.d("Localizacion", "Ubicacion Rosario: " + ROSARIO.toString());
-        }
-	
+    }
 	/** this criteria will settle for less accuracy, high power, and cost */
 	public static Criteria createCoarseCriteria() {
 	 
@@ -59,7 +55,6 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	  return c;
 	 
 	}
-	 
 	/** this criteria needs high accuracy, high power, and cost */
 	public static Criteria createFineCriteria() {
 	 
@@ -92,10 +87,11 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	        new LocationListener() {
 	        public void onLocationChanged(Location location) {
 	          // do something here to save this new location
-	          int lat = (int) (location.getLatitude());
-	          int lng = (int) (location.getLongitude());
+	          float lat = (float) (location.getLatitude());
+	          float lng = (float) (location.getLongitude());
 	          LatLng latLng = new LatLng(lat, lng);
 	          actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+
 	          Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
 	                  " logitud: " + lng + "Valor al mapa" + latLng);
 	          Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
@@ -125,8 +121,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	        new LocationListener() {
 	        public void onLocationChanged(Location location) {
 	            // do something here to save this new location
-	            int lat = (int) (location.getLatitude());
-	            int lng = (int) (location.getLongitude());
+	            float lat = (float) (location.getLatitude());
+	            float lng = (float) (location.getLongitude());
 	            LatLng latLng = new LatLng(lat, lng);
 	            actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
 	            Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
