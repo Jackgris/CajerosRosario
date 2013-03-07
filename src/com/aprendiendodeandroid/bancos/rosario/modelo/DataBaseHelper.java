@@ -1,13 +1,26 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+/**
+ * Esta clase se va a encargar de la creacion de la base de datos
+ * @author gabriel
+ *
+ */
+public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajeros {
 
-	final private String tableCajeros = "CREATE TABLE cajeros (codigo INTEGER, nombre TEXT)";
+    /*
+     * Estas van a ser las consultas con las que se van a crear las tablas e insertar los datos por
+     * defecto, que van a estar dentro de nuestra bd
+     */
+	final static private String tableCajeros = "CREATE TABLE " + TABLE_CAJEROS +
+	        " (codigo INTEGER, nombre TEXT)";
+	final static private String eliminarTablaCajeros = "DROP TABLE IF EXISTS " + TABLE_CAJEROS;
 	 
 	
 	/**
@@ -25,8 +38,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// Aca vamos a crear la base de datos
-		db.execSQL(tableCajeros);
+		// Aca vamos a armar la estructura de la base de datos
+	    try{
+	        // Creamos la tabla
+	        db.execSQL(tableCajeros);
+	    }
+	    catch(SQLException ex){
+	        Log.d("SQLException", "CREATE: " + ex.getMessage());
+	    }
 	}
 
 	@Override
@@ -35,11 +54,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		// verificamos si es una version nueva de la base de datos, si es asi creamos la tabla
 		// nueva
 		if(versionanterior < nuevaversion){
-		//Se elimina la versión anterior de la tabla
-        db.execSQL("DROP TABLE IF EXISTS Usuarios");
- 
-        //Se crea la nueva versión de la tabla
-        db.execSQL(tableCajeros);
+		    try{
+		        //Se elimina la version anterior de la tabla
+	            db.execSQL(eliminarTablaCajeros);
+	     
+	            //Se crea la nueva version de la tabla
+	            db.execSQL(tableCajeros);
+	            
+	            // FIXME falta rinsertar los datos y demas cosas
+		    }
+		    catch(SQLException ex){
+	            Log.d("SQLException", "UPGRADE: " + ex.getMessage());
+	        }
+
 		}
 	}
 

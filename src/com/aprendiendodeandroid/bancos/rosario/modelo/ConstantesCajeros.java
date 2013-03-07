@@ -19,5 +19,4 @@ public interface ConstantesCajeros extends BaseColumns{
 	public static final String COLUMN_CALLE = "calle";
 	public static final String COLUMN_ALTURA = "altura";
 	public static final String COLUMN_BANCO = "nombre_banco";
-
 }
