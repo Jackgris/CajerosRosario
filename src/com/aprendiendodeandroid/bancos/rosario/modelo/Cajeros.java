@@ -7,7 +7,7 @@ public class Cajeros {
 	private int longitud;
 	private int latitud;
 	private String nombreBanco;
-	private boolean tipoCajero;
+	private String tipoCajero;
 		
 	public String getDireccion() {
 		return direccion;
@@ -39,10 +39,10 @@ public class Cajeros {
 	public void setNombreBanco(String nombreBanco) {
 		this.nombreBanco = nombreBanco;
 	}
-	public boolean isTipoCajero() {
+	public String isTipoCajero() {
 		return tipoCajero;
 	}
-	public void setTipoCajero(boolean tipoCajero) {
+	public void setTipoCajero(String tipoCajero) {
 		this.tipoCajero = tipoCajero;
 	}
 }
