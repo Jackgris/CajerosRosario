@@ -29,7 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 			+ COLUMN_LATITUD + "INTEGER," 
 	        + COLUMN_LATITUD + "INTEGER," 
 			+ COLUMN_TELEFONO + " TEXT)";
-	
+    	
 	// Elimnar la tabla
 	final static private String eliminarTablaCajeros = "DROP TABLE IF EXISTS " + TABLE_CAJEROS;
 	
@@ -335,7 +335,65 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 			"'50','Banco Municipal de Rosario','Link','San Lorenzo', '1055', " +
 			"'-329444246','-606370573')";
 	
+	final static private String insert51 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'51','Banco Saenz S.A.','Link','Rioja', '1040', " +
+            "'-329477772','-606376584')";
 	
+	final static private String insert52 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'52','Banex','Banelco','Av. Cordoba', '960', " +
+            "'-32946809','-606362197')";
+	
+	final static private String insert53 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'53','Bank Boston','Banelco','Paraguay', '927', " +
+            "'-329469832','-60644138')";
+	
+	final static private String insert54 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'54','Bank Boston','Banelco','25 De Mayo Bis', '1340', " +
+            "'-328532907','-607831037')";
+	
+	final static private String insert55 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'55','Bank Boston','Banelco','Av. Cordoba', '1201', " +
+            "'-329462101','-606396129')";
+	
+	final static private String insert56 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'56','Bank Boston','Banelco','Av. Carlos Pellegrini', '1125', " +
+            "'-329571723','-606412048')";
+	
+	final static private String insert57 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'57','Bank Boston','Banelco','Nansen', '255', " +
+            "'-329091438','-606825585')";
+	
+	final static private String insert58 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'58','Bank Boston','Banelco','Cordoba', '1201', " +
+            "'-329462101','-606396129')";
+	
+	final static private String insert59 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'59','Bank Boston','Banelco','Nansen', '323', " +
+            "'-329091628','-606834603')";
+	
+	final static private String insert60 = "INSERT INTO " + TABLE_CAJEROS + "(" + COLUMN_ID + "," 
+            + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + "," 
+            + COLUMN_LATITUD + "," + COLUMN_LATITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+            "'60','Bank Boston','Banelco','J. M. De Rosas', '957', " +
+            "'-329398285','-606865085')";
 	
 	/**
 	 * Constructor por defecto para la clase con la que vamos a crear nuestra base de datos
