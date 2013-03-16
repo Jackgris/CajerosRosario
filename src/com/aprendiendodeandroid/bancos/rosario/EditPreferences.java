@@ -13,7 +13,8 @@ public class EditPreferences extends PreferenceActivity {
 	        super.onCreate(savedInstanceState);
 	    }
 	 
-	    @Override
+	    @SuppressWarnings("deprecation")
+		@Override
 	    protected void onResume()
 	    {
 	        super.onResume();

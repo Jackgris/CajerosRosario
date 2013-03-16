@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+@SuppressWarnings("deprecation")
 public class ManageTabsActivity extends TabActivity {
 
 	  /** Called when the activity is first created. */

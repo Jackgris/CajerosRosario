@@ -1,6 +1,7 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -43,5 +44,39 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
         } catch(SQLException e) {
             Log.v("ejecutarSql", e.getMessage());
         }
+    }
+	
+	/**
+	 * Esta funcion tiene  mayormente propositos de testing, para corroborar que los datos estan
+	 * correctamente accesibles
+	 * @param context solo es el contexto desde donde se va a llamar a la funcion
+	 * @return String un simple string donde se contendra el total de los cajeros
+	 */
+	public String totalCajeros(Context context) {
+		
+		final String SQLTOTALCAJEROS = "SELECT * FROM " + ConstantesCajeros.TABLE_CAJEROS;
+		String total = "";
+		
+        try {       
+            DataBaseHelper bd = new DataBaseHelper(context, CAJEROSAUTOMATICOS, null, VERSION);
+            SQLiteDatabase base = bd.getWritableDatabase();
+            Cursor cursor = base.rawQuery(SQLTOTALCAJEROS, null);
+
+            //Nos aseguramos de que existe al menos un registro
+            if (cursor.moveToFirst()) {
+                 //Recorremos el cursor hasta que no haya más registros
+                 do {
+                      String cajero = cursor.getString(0);
+                      
+                      total += cajero;
+                 } while(cursor.moveToNext());
+            }
+                       
+            base.close();
+        } catch(SQLException e) {
+            Log.v("ejecutarSql", e.getMessage());
+        }
+        
+        return total;
     }
 }

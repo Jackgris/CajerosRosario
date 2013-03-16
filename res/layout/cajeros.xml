@@ -4,48 +4,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-<LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/primeradescricion" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/TODO"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otradescipcion" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/primeradescricion" />
+            android:text="@string/create" />
 
-        <ImageView
-            android:id="@+id/imageView1"
+        <DigitalClock
+            android:id="@+id/digitalClock1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/otradescipcion" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create" />
-
-            <DigitalClock
-                android:id="@+id/digitalClock1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reloj" />
-
-        </LinearLayout>
-
+            android:text="@string/reloj" />
     </LinearLayout>
-
 
 </LinearLayout>

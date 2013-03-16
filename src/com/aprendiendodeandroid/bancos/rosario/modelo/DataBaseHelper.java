@@ -21,7 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 	
 	// FIXME crear la tabla
 	final static private String tableCajeros = "CREATE TABLE " + TABLE_CAJEROS +
-	        " (" + COLUMN_ID + " INTEGER PRIMARY KEY NOT NULL ASC, "
+	        " (" + COLUMN_ID + " INTEGER PRIMARY KEY NOT NULL, "
 			+ COLUMN_BANCO + "TEXT,"
 	        + COLUMN_RED + "TEXT,"
 			+ COLUMN_CALLE + "TEXT," 
@@ -414,6 +414,69 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 	    try{
 	        // Creamos la tabla
 	        db.execSQL(tableCajeros);
+	      
+	        // Insertamos los datos
+	        db.execSQL(insert1);
+	        db.execSQL(insert2);
+	        db.execSQL(insert3);
+	        db.execSQL(insert4);
+	        db.execSQL(insert5);
+	        db.execSQL(insert6);
+	        db.execSQL(insert7);
+	        db.execSQL(insert8);
+	        db.execSQL(insert9);
+	        db.execSQL(insert10);
+	        db.execSQL(insert11);
+	        db.execSQL(insert12);
+	        db.execSQL(insert13);
+	        db.execSQL(insert14);
+	        db.execSQL(insert15);
+	        db.execSQL(insert16);
+	        db.execSQL(insert17);
+	        db.execSQL(insert18);
+	        db.execSQL(insert19);
+	        db.execSQL(insert20);
+	        db.execSQL(insert21);
+	        db.execSQL(insert22);
+	        db.execSQL(insert23);
+	        db.execSQL(insert24);
+	        db.execSQL(insert25);
+	        db.execSQL(insert26);
+	        db.execSQL(insert27);
+	        db.execSQL(insert28);
+	        db.execSQL(insert29);
+	        db.execSQL(insert30);
+	        db.execSQL(insert31);
+	        db.execSQL(insert32);
+	        db.execSQL(insert33);
+	        db.execSQL(insert34);
+	        db.execSQL(insert35);
+	        db.execSQL(insert36);
+	        db.execSQL(insert37);
+	        db.execSQL(insert38);
+	        db.execSQL(insert39);
+	        db.execSQL(insert40);
+	        db.execSQL(insert41);
+	        db.execSQL(insert42);
+	        db.execSQL(insert43);
+	        db.execSQL(insert44);
+	        db.execSQL(insert45);
+	        db.execSQL(insert46);
+	        db.execSQL(insert47);
+	        db.execSQL(insert48);
+	        db.execSQL(insert49);
+	        db.execSQL(insert50);
+	        db.execSQL(insert51);
+	        db.execSQL(insert52);
+	        db.execSQL(insert53);
+	        db.execSQL(insert54);
+	        db.execSQL(insert55);
+	        db.execSQL(insert56);
+	        db.execSQL(insert57);
+	        db.execSQL(insert58);
+	        db.execSQL(insert59);
+	        db.execSQL(insert60);
+
 	    }
 	    catch(SQLException ex){
 	        Log.d("SQLException", "CREATE: " + ex.getMessage());
@@ -433,7 +496,68 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 	            //Se crea la nueva version de la tabla
 	            db.execSQL(tableCajeros);
 	            
-	            // FIXME falta rinsertar los datos y demas cosas
+	         // Insertamos los datos
+		        db.execSQL(insert1);
+		        db.execSQL(insert2);
+		        db.execSQL(insert3);
+		        db.execSQL(insert4);
+		        db.execSQL(insert5);
+		        db.execSQL(insert6);
+		        db.execSQL(insert7);
+		        db.execSQL(insert8);
+		        db.execSQL(insert9);
+		        db.execSQL(insert10);
+		        db.execSQL(insert11);
+		        db.execSQL(insert12);
+		        db.execSQL(insert13);
+		        db.execSQL(insert14);
+		        db.execSQL(insert15);
+		        db.execSQL(insert16);
+		        db.execSQL(insert17);
+		        db.execSQL(insert18);
+		        db.execSQL(insert19);
+		        db.execSQL(insert20);
+		        db.execSQL(insert21);
+		        db.execSQL(insert22);
+		        db.execSQL(insert23);
+		        db.execSQL(insert24);
+		        db.execSQL(insert25);
+		        db.execSQL(insert26);
+		        db.execSQL(insert27);
+		        db.execSQL(insert28);
+		        db.execSQL(insert29);
+		        db.execSQL(insert30);
+		        db.execSQL(insert31);
+		        db.execSQL(insert32);
+		        db.execSQL(insert33);
+		        db.execSQL(insert34);
+		        db.execSQL(insert35);
+		        db.execSQL(insert36);
+		        db.execSQL(insert37);
+		        db.execSQL(insert38);
+		        db.execSQL(insert39);
+		        db.execSQL(insert40);
+		        db.execSQL(insert41);
+		        db.execSQL(insert42);
+		        db.execSQL(insert43);
+		        db.execSQL(insert44);
+		        db.execSQL(insert45);
+		        db.execSQL(insert46);
+		        db.execSQL(insert47);
+		        db.execSQL(insert48);
+		        db.execSQL(insert49);
+		        db.execSQL(insert50);
+		        db.execSQL(insert51);
+		        db.execSQL(insert52);
+		        db.execSQL(insert53);
+		        db.execSQL(insert54);
+		        db.execSQL(insert55);
+		        db.execSQL(insert56);
+		        db.execSQL(insert57);
+		        db.execSQL(insert58);
+		        db.execSQL(insert59);
+		        db.execSQL(insert60);
+
 		    }
 		    catch(SQLException ex){
 	            Log.d("SQLException", "UPGRADE: " + ex.getMessage());
