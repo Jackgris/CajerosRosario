@@ -68,7 +68,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                  do {
                       String cajero = cursor.getString(0);
                       
-                      total += cajero;
+                      total += " " + cajero;
                  } while(cursor.moveToNext());
             }
                        
