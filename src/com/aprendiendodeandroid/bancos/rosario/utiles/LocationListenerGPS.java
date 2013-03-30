@@ -1,7 +1,9 @@
 package com.aprendiendodeandroid.bancos.rosario.utiles;
 
 import com.aprendiendodeandroid.bancos.rosario.MapaGeneral;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -24,9 +26,25 @@ public class LocationListenerGPS implements LocationListener{
       float lng = (float) (location.getLongitude());
       LatLng latLng = new LatLng(lat, lng);
       mapa = MapaGeneral.mapa;
-      actual = mapa.addMarker(new MarkerOptions().position(latLng).title("Rosario"));
+      actual = mapa.addMarker(new MarkerOptions().position(latLng).title(
+    		  "En esta parte de Rosario te encuentras"));
+      
       Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
                 " logitud: " + lng + "Valor al mapa" + latLng);
+      
+      
+      CameraPosition cameraPosition = new CameraPosition.Builder()
+		.target(latLng)      // seteamos el centro del mapa en la posicion actual
+		.zoom(12)                   // configuramos el zoom
+		.bearing(90)                // seteamos la orientacion hacia el este
+		.tilt(30)                   // configuramos el angulo de la camara a 30 grados
+		.build();                   // Una vez seteado los parametros, construimos el objetos
+	      
+      // ubicamos nuestra posicion en el mapa, para que sea centrado ahi, con un angulo y vista
+      mapa.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+	
+      
+      
     }           
 
     public void onStatusChanged(String provider, int status, Bundle extras) {

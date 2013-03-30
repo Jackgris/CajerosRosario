@@ -4,11 +4,9 @@ import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerGPS;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.Context;
-import android.location.Location;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
@@ -23,12 +21,12 @@ import android.os.Bundle;
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
 	public static GoogleMap mapa;
-	//private static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
-	//final private float posicionzoomgeneral = 17;
+//	private static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
 	private LocationListenerGPS locationListenerGPS = new LocationListenerGPS();
 	public static Context context;
+	SensorManager sensorManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +37,17 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		getApplicationContext();
         locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         
-		
+		// obtenemos el mapa desde el fragment
 		mapa = (((SupportMapFragment)getSupportFragmentManager().
-		        findFragmentById(R.id.mapa)).getMap());	
+		        findFragmentById(R.id.mapa)).getMap());
+		
+		// seteamos para que este el boton de buscar nuestra ubicacion activado
 		mapa.setMyLocationEnabled(true);
 		
+		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+		
 		iniciamosLaEscucha();
+				
     }
 	/** 
 	 hay que asegurarse de usar esta funcion en el hilo principal, y no en un hilo en background 
@@ -66,32 +69,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
 	  // usamos el proveedor que tiene mayor precision... le agregamos el listener para actualizar
 	  locationManager.requestLocationUpdates(high.getName(), 0, 0f, locationListenerGPS);
-	  
-	  // TODO hay que verificar que esto funcione correctamente
-	  if (locationListenerGPS.getMapa() != null) {
-	      mapa = locationListenerGPS.getMapa();
-	      
-	      String locationProvider = LocationManager.GPS_PROVIDER;
-	      
-	      Location ultimaUbicacion = locationManager.getLastKnownLocation(locationProvider);
-	      
 
-	      mapa.addMarker(new MarkerOptions()
-	        .position(new LatLng(ultimaUbicacion.getLatitude(), ultimaUbicacion.getLongitude()))
-	        .title("Aquí estas ;)"));
-	  }
-	  else if (locationListenerNET.getMapa() != null) {
-	      mapa = locationListenerNET.getMapa();
-			
-	      String locationProvider = LocationManager.NETWORK_PROVIDER;
-	      
-	      Location ultimaUbicacion = locationManager.getLastKnownLocation(locationProvider);
-	      
-	      mapa.addMarker(new MarkerOptions()
-	        .position(new LatLng(ultimaUbicacion.getLatitude(), ultimaUbicacion.getLongitude()))
-	        .title("Aquí estas ;)"));
-	  }
 	}
+
 	/**
 	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion	
 	 */
