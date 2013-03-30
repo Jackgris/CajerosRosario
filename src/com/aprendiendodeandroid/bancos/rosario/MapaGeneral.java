@@ -6,7 +6,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import android.content.Context;
-import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
@@ -21,12 +20,11 @@ import android.os.Bundle;
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
 	public static GoogleMap mapa;
-//	private static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
+	//	private static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
 	private LocationListenerGPS locationListenerGPS = new LocationListenerGPS();
 	public static Context context;
-	SensorManager sensorManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +41,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		
 		// seteamos para que este el boton de buscar nuestra ubicacion activado
 		mapa.setMyLocationEnabled(true);
-		
-		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-		
+				
 		iniciamosLaEscucha();
 				
     }
@@ -64,12 +60,15 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	    locationManager.getProvider(locationManager.getBestProvider(LocationListenerGPS.
 	            crearCriteriaGPS(), false));
 	 
-	  // usamos el proveedor de baja precision... y le ponemos el listener para que lo actualice
-	  locationManager.requestLocationUpdates(low.getName(), 0, 0f, locationListenerNET);
-
-	  // usamos el proveedor que tiene mayor precision... le agregamos el listener para actualizar
-	  locationManager.requestLocationUpdates(high.getName(), 0, 0f, locationListenerGPS);
-
+	  // FIXME tengo que comprobar en realidad cada cierto tiempo si el GPS tomo ubicacion
+	  if(locationListenerGPS.getActual() != null){
+		  // usamos el proveedor que tiene mayor precision... le agregamos el listener para actualizar
+		  locationManager.requestLocationUpdates(high.getName(), 0, 0f, locationListenerGPS);		  
+	  }
+	  else{
+		  // usamos el proveedor de baja precision... y le ponemos el listener para que lo actualice
+		  locationManager.requestLocationUpdates(low.getName(), 0, 0f, locationListenerNET);  
+	  }
 	}
 
 	/**
