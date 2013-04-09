@@ -79,4 +79,22 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
         
         return total;
     }
+
+	@Override
+	public void consultaCajerosBanelco(Context context) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void consultaCajerosLink(Context context) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void consultaUnCajero(Context context, String red, String direccion) {
+		// TODO Auto-generated method stub
+		
+	}
 }

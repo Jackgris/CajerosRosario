@@ -20,7 +20,6 @@ import android.os.Bundle;
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
 	public static GoogleMap mapa;
-	//	private static final LatLng ROSARIO = new LatLng(-32.962, -780.662);
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
 	private LocationListenerGPS locationListenerGPS = new LocationListenerGPS();
@@ -45,6 +44,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		iniciamosLaEscucha();
 				
     }
+	
 	/** 
 	 hay que asegurarse de usar esta funcion en el hilo principal, y no en un hilo en background 
 	 hay que asegurarse de remover las actualizaciones cuando no se use mas
@@ -80,6 +80,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		locationManager.removeUpdates(locationListenerGPS);
 		locationManager.removeUpdates(locationListenerNET);
 	}
+	
 	/**
 	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion 
 	 */
@@ -89,6 +90,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		locationManager.removeUpdates(locationListenerGPS);
 		locationManager.removeUpdates(locationListenerNET);
 	}
+	
 	/**
 	 * Volvemos a arrancar las actualizaciones
 	 */

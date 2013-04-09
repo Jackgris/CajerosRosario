@@ -26,4 +26,26 @@ public interface CajerosDAO {
      * @param sql 
      */
     public void ejecutarSql(Context context, String sql);
+    
+    /**
+     * Este metodo se encargara de devolvernos la totalidad de los datos de los cajeros de la 
+     * red Banelco
+     * @param context
+     */
+    public void consultaCajerosBanelco(Context context);
+    
+    /**
+     * Este metodo se encargara de devolvernos la totalidad de los datos de los cajeros 
+     * de la red Link
+     * @param context
+     */
+    public void consultaCajerosLink(Context context);
+    
+    /**
+     * Esta consulta se encargara de devolvernos simplemente uno solo de los cajeros que elijamos
+     * @param context
+     * @param red
+     * @param direccion
+     */
+    public void consultaUnCajero(Context context, String red, String direccion);
 }
