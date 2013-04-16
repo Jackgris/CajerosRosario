@@ -31,7 +31,6 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		setContentView(R.layout.mapageneral);
 		context = getApplicationContext();
 		
-		getApplicationContext();
         locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         
 		// obtenemos el mapa desde el fragment
