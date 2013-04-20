@@ -1,5 +1,8 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -29,11 +32,6 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
         }
     }
     
-    /**
-     * Esta funcion recibe una sentencia SQL y la ejecuta
-     * @param Context context estado de la aplicacion
-     * @param String sql sentencia a ejecutar
-     */
 	public void ejecutarSql(Context context, String sql) {
 	        
         try {       
@@ -81,20 +79,99 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
     }
 
 	@Override
-	public void consultaCajerosBanelco(Context context) {
-		// TODO Auto-generated method stub
+	public List<Cajero> consultaCajerosBanelco(Context context) {
+		List<Cajero> resultado = new ArrayList<Cajero>();
+		Cajero cajero = null;
+		
+		final String SQL_CAJEROS_LINK = "SELECT * FROM " + ConstantesCajeros.TABLE_CAJEROS +
+				" WHERE " + ConstantesCajeros.COLUMN_RED + " IN ('Banelco')" ;
+		
+        try {       
+            DataBaseHelper bd = new DataBaseHelper(context, CAJEROSAUTOMATICOS, null, VERSION);
+            SQLiteDatabase base = bd.getWritableDatabase();
+            Cursor cursor = base.rawQuery(SQL_CAJEROS_LINK, null);
+            
+            Log.d("CONSULTA", "Resultado: " + cursor.toString());
+            //Nos aseguramos de que existe al menos un registro
+            if (cursor.moveToFirst()) {
+                 //Recorremos el cursor hasta que no haya más registros
+                 do {
+                	  cajero = new Cajero();
+                      String banco = cursor.getString(1);
+                      String calle = cursor.getString(3);
+                      Integer altura = cursor.getInt(4);
+                      Integer latitud = cursor.getInt(5);
+                      Integer longitud = cursor.getInt(6);
+                      
+                      cajero.setNombreBanco(banco);
+                      cajero.setDireccion(calle + " " + altura);
+                      cajero.setLatitud(latitud);
+                      cajero.setLongitud(longitud);
+                      
+                      resultado.add(cajero);
+                      
+                 } while(cursor.moveToNext());
+            }
+                       
+            base.close();
+        } catch(SQLException e) {
+            Log.v("ejecutarSql", e.getMessage());
+        }
+        
+        return resultado;
+		
 		
 	}
 
 	@Override
-	public void consultaCajerosLink(Context context) {
-		// TODO Auto-generated method stub
+	public List<Cajero> consultaCajerosLink(Context context) {
+		
+		List<Cajero> resultado = new ArrayList<Cajero>();
+		Cajero cajero = null;
+		
+		final String SQL_CAJEROS_LINK = "SELECT * FROM " + ConstantesCajeros.TABLE_CAJEROS +
+				" WHERE " + ConstantesCajeros.COLUMN_RED + " IN ('Link')" ;
+		
+        try {       
+            DataBaseHelper bd = new DataBaseHelper(context, CAJEROSAUTOMATICOS, null, VERSION);
+            SQLiteDatabase base = bd.getWritableDatabase();
+            Cursor cursor = base.rawQuery(SQL_CAJEROS_LINK, null);
+
+            Log.d("CONSULTA", "Resultado: " + cursor.toString());
+            //Nos aseguramos de que existe al menos un registro
+            if (cursor.moveToFirst()) {
+                 //Recorremos el cursor hasta que no haya más registros
+                 do {
+                	  cajero = new Cajero();
+                      String banco = cursor.getString(1);
+                      String calle = cursor.getString(3);
+                      Integer altura = cursor.getInt(4);
+                      Integer latitud = cursor.getInt(5);
+                      Integer longitud = cursor.getInt(6);
+                      
+                      cajero.setNombreBanco(banco);
+                      cajero.setDireccion(calle + " " + altura);
+                      cajero.setLatitud(latitud);
+                      cajero.setLongitud(longitud);
+                      
+                      resultado.add(cajero);
+                      
+                 } while(cursor.moveToNext());
+            }
+                       
+            base.close();
+        } catch(SQLException e) {
+            Log.v("ejecutarSql", e.getMessage());
+        }
+        
+        return resultado;
 		
 	}
 
 	@Override
-	public void consultaUnCajero(Context context, String red, String direccion) {
+	public Cajero consultaUnCajero(Context context, String red, String direccion) {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 }

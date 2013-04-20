@@ -1,5 +1,7 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
+import java.util.List;
+
 import android.content.Context;
 
 /**
@@ -32,14 +34,14 @@ public interface CajerosDAO {
      * red Banelco
      * @param context
      */
-    public void consultaCajerosBanelco(Context context);
+    public List<Cajero> consultaCajerosBanelco(Context context);
     
     /**
      * Este metodo se encargara de devolvernos la totalidad de los datos de los cajeros 
      * de la red Link
      * @param context
      */
-    public void consultaCajerosLink(Context context);
+    public List<Cajero> consultaCajerosLink(Context context);
     
     /**
      * Esta consulta se encargara de devolvernos simplemente uno solo de los cajeros que elijamos
@@ -47,5 +49,5 @@ public interface CajerosDAO {
      * @param red
      * @param direccion
      */
-    public void consultaUnCajero(Context context, String red, String direccion);
+    public Cajero consultaUnCajero(Context context, String red, String direccion);
 }

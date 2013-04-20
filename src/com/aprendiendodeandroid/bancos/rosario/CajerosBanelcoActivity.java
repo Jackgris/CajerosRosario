@@ -1,13 +1,13 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
-import com.aprendiendodeandroid.bancos.rosario.Cajero;
+import com.aprendiendodeandroid.bancos.rosario.Cajeros;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 public class CajerosBanelcoActivity extends FragmentActivity implements 
-	Cajero.OnHeadlineSelectedListener{
+	Cajeros.OnHeadlineSelectedListener{
 
     /** Called when the activity is first created. */
     @Override
@@ -27,7 +27,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
             }
 
             // Create an instance of ExampleFragment
-            Cajero firstFragment = new Cajero();
+            Cajeros firstFragment = new Cajeros();
 
             // In case this activity was started with special instructions from an Intent,
             // pass the Intent's extras to the fragment as arguments

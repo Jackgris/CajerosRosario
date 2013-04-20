@@ -1,6 +1,9 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
+import java.util.List;
+
 import com.aprendiendodeandroid.bancos.rosario.R;
+import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
 
 import android.app.Activity;
@@ -32,8 +35,16 @@ public class CajerosLinkActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// FIXME Este metodo es simplemente para realizar un test
+				List<Cajero> mostrar = cajerosDAOImpl.consultaCajerosLink(getApplicationContext());
+				String mostrarString = "";
+				
+				for (Cajero cajero : mostrar) {
+					mostrarString += cajero.getNombreBanco() + " " + cajero.getDireccion() + "\n";
+				}
+				
 				Toast.makeText(getApplicationContext(), 
-						"Estos son los cajeros: " + cajerosDAOImpl.totalCajeros(getApplicationContext()), Toast.LENGTH_SHORT).show();
+						"Estos son los cajeros de la red Link: " + 
+								mostrarString, Toast.LENGTH_SHORT).show();
 				
 			}
 		});

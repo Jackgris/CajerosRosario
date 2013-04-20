@@ -1,6 +1,6 @@
 package com.aprendiendodeandroid.bancos.rosario.modelo;
 
-public class Cajeros {
+public class Cajero {
 
 	private String direccion;
 	private String telefonoBanco;

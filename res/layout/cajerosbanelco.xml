@@ -23,7 +23,7 @@
 
     </RelativeLayout>
     
-    <fragment android:name="com.aprendiendodeandroid.bancos.rosario.Cajero"
+    <fragment android:name="com.aprendiendodeandroid.bancos.rosario.Cajeros"
               android:id="@+id/article_fragment"
              
               android:layout_width="0dp"

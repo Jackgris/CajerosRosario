@@ -2,7 +2,7 @@ package com.aprendiendodeandroid.bancos.rosario.utiles;
 
 import java.util.List;
 
-import com.aprendiendodeandroid.bancos.rosario.modelo.Cajeros;
+import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 
 public class LocalizacionHelperImpl extends Localizacion implements LocalizacionHelper{
 
@@ -11,17 +11,17 @@ public class LocalizacionHelperImpl extends Localizacion implements Localizacion
 		
 	}
 
-	public List<Cajeros> posicionCajerosBanelco() {
+	public List<Cajero> posicionCajerosBanelco() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Cajeros> posicionCajerosRedLink() {
+	public List<Cajero> posicionCajerosRedLink() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Cajeros> posicionTodosLosCajeros() {
+	public List<Cajero> posicionTodosLosCajeros() {
 		// TODO Auto-generated method stub
 		return null;
 	}

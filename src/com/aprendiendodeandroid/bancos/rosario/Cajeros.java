@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Cajero extends ListFragment{
+public class Cajeros extends ListFragment{
 
     OnHeadlineSelectedListener mCallback;
 
