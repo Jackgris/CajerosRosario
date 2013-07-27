@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2012 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.aprendiendodeandroid.bancos.rosario;
 
 import android.os.Bundle;
@@ -22,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * Este es el fragment que va a contener la informacion del cajero
+ */
 public class CajeroFragment extends Fragment {
+
     final static String ARG_POSITION = "position";
     int mCurrentPosition = -1;
 
@@ -30,14 +20,14 @@ public class CajeroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
 
-        // If activity recreated (such as from screen rotate), restore
-        // the previous article selection set by onSaveInstanceState().
-        // This is primarily necessary when in the two-pane layout.
+        // Si la activity es recreada, como al girar la pantalla, restauramos la seleccion
+        // previa de cajeros configurada en el metodo onSaveInstanceState().
+        // Esto es principalmente necesario, cuando tenemos los dos panerles en el layout
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
         }
 
-        // Inflate the layout for this fragment
+        // Inflamos el  layout para este fragment
         return inflater.inflate(R.layout.cajero, container, false);
     }
 
@@ -45,9 +35,9 @@ public class CajeroFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // During startup, check if there are arguments passed to the fragment.
-        // onStart is a good place to do this because the layout has already been
-        // applied to the fragment at this point so we can safely call the method
+        // Durante el arranque, verificamos si se le pasaron parametros al fragment.
+        // onStart es un buen lugar para realizar esto, porque el layout esta listo para que se le
+        // coloque el fragment en este punto, es seguro llamar a nuestro metodos, como el configurar
         // below that sets the article text.
         Bundle args = getArguments();
         if (args != null) {

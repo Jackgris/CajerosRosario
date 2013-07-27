@@ -4,73 +4,72 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
-import com.aprendiendodeandroid.bancos.rosario.CajeroFragment;
-import com.aprendiendodeandroid.bancos.rosario.Cajeros;
-import com.aprendiendodeandroid.bancos.rosario.R;
-
+/**
+ * Esta clase va a ser la encargada de manejar la vista de los cajeros Banelco
+ */
 public class CajerosBanelcoActivity extends FragmentActivity implements
-	Cajeros.OnHeadlineSelectedListener{
+	                                                            Cajeros.OnHeadlineSelectedListener{
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cajerosbanelco);
 
-        // Check whether the activity is using the layout version with
-        // the fragment_container FrameLayout. If so, we must add the first fragment
+        // Verificamos que la activity este usando el layout con el fragment
+        // conteinerbanelco FrameLayout. Si es asi, deberiamos agregar el fragment de tipo cajero
         if (findViewById(R.id.conteinerbanelco) != null) {
 
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
+            // Sin enbargo, si vamos a restaurar desde un estado anterior,
+            // entonces no necesitamos realizar nada, asi que simplemente retornamos
+            // o podriamos cambiar y actualizar algunas cosas del fragment.
             if (savedInstanceState != null) {
                 return;
             }
 
-            // Create an instance of ExampleFragment
-            Cajeros firstFragment = new Cajeros();
+            // Creamos una instancia del fragment
+            Cajeros cajeros = new Cajeros();
 
-            // In case this activity was started with special instructions from an Intent,
-            // pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments(getIntent().getExtras());
+            // En caso de que la activity comenzo con algunas instrucciones en el intent,
+            // podemos tomarlos y pasarcelo a nuestro fragment
+            cajeros.setArguments(getIntent().getExtras());
 
-            // Add the fragment to the 'fragment_container' FrameLayout
+            // agregamos el fragment a nuestro conteiner
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.conteinerbanelco, firstFragment).commit();
+                    .add(R.id.conteinerbanelco, cajeros).commit();
         }
     }
 
     @Override
     public void onArticleSelected(int position) {
-        // The user selected the headline of an article from the HeadlinesFragment
 
-        // Capture the article fragment from the activity layout
-        CajeroFragment articleFrag = (CajeroFragment)
+        // Cuando el usuario elige uno de los elementos realizaremos algunas accion
+
+        // Capturamos la seleccion que se realizo sobre nuestro layout
+        CajeroFragment cajeroFragment = (CajeroFragment)
                 getSupportFragmentManager().findFragmentById(R.id.article_fragment);
 
-        if (articleFrag != null) {
-            // If article frag is available, we're in two-pane layout...
-
-            // Call a method in the ArticleFragment to update its content
-            articleFrag.updateArticleView(position);
+        if (cajeroFragment != null) {
+            // Si el cajero se puede ver en un segundo fragment en nuestra vista, realizamos
+            // una llamada para actualizar el contenido de la vista
+            cajeroFragment.updateArticleView(position);
 
         } else {
-            // If the frag is not available, we're in the one-pane layout and must swap frags...
+            // Si no es posible verlo en un segundo fragment, entonces actulizamos nuestra vista
+            // actual para que intercambien el fragment, por el que deseamos observar
 
-            // Create fragment and give it an argument for the selected article
-            CajeroFragment newFragment = new CajeroFragment();
-            Bundle args = new Bundle();
-            args.putInt(CajeroFragment.ARG_POSITION, position);
-            newFragment.setArguments(args);
+            // Creamos el fragment, y le pasamos los argunmentos sobre el cajero seleccionado
+            CajeroFragment nuevoCajeroFragment = new CajeroFragment();
+            Bundle argumentos = new Bundle();
+            argumentos.putInt(CajeroFragment.ARG_POSITION, position);
+            nuevoCajeroFragment.setArguments(argumentos);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.conteinerbanelco, newFragment);
+            // Reemplazamos cualquier fragment seleccionado anteriormente por el este,
+            // y lo agregamos a la transaccion para que el usuario pueda navegar hacia atras
+            transaction.replace(R.id.conteinerbanelco, nuevoCajeroFragment);
             transaction.addToBackStack(null);
 
-            // Commit the transaction
+            // Realizamos la transaccion
             transaction.commit();
         }
     }
