@@ -5,15 +5,17 @@ import roboguice.inject.ContentView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 
 // con esta anotation seteamos la vista que vamos a cargar por medio de RoboGuice
-@ContentView(R.layout.splashscreen)
-public class SplashScreen extends RoboFragmentActivity{
+//@ContentView(R.layout.splashscreen)
+public class SplashScreen extends FragmentActivity{
 	protected EstadoSalvado data;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splashscreen);
 
         this.data = (EstadoSalvado) getLastCustomNonConfigurationInstance();
         if (this.data == null) {
