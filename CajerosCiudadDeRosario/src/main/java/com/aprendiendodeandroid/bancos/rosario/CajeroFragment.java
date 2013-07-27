@@ -38,18 +38,18 @@ public class CajeroFragment extends Fragment {
         // Durante el arranque, verificamos si se le pasaron parametros al fragment.
         // onStart es un buen lugar para realizar esto, porque el layout esta listo para que se le
         // coloque el fragment en este punto, es seguro llamar a nuestro metodos, como el configurar
-        // below that sets the article text.
+        // el texto a mostrar en el mismo.
         Bundle args = getArguments();
         if (args != null) {
-            // Set article based on argument passed in
-            updateArticleView(args.getInt(ARG_POSITION));
+            // le seteamos los argunmentos pasados
+            updateCajeroView(args.getInt(ARG_POSITION));
         } else if (mCurrentPosition != -1) {
             // Set article based on saved instance state defined during onCreateView
-            updateArticleView(mCurrentPosition);
+            updateCajeroView(mCurrentPosition);
         }
     }
 
-    public void updateArticleView(int position) {
+    public void updateCajeroView(int position) {
         TextView article = (TextView) getActivity().findViewById(R.id.cajero);
         article.setText(Ipsum.Articles[position]);
         mCurrentPosition = position;

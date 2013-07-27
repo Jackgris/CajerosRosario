@@ -51,7 +51,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
         if (cajeroFragment != null) {
             // Si el cajero se puede ver en un segundo fragment en nuestra vista, realizamos
             // una llamada para actualizar el contenido de la vista
-            cajeroFragment.updateArticleView(position);
+            cajeroFragment.updateCajeroView(position);
 
         } else {
             // Si no es posible verlo en un segundo fragment, entonces actulizamos nuestra vista
