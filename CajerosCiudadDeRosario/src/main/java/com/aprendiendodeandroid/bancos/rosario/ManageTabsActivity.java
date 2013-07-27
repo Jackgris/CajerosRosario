@@ -51,9 +51,9 @@ public class ManageTabsActivity extends TabActivity {
         
         // Adding all TabSpec to TabHost
         tabHost.addTab(mapageneral); // Adding mapa general
-        tabHost.addTab(generalCajeros); // Adding general tab
         tabHost.addTab(cajerosBanelco); // Adding banelco tab
         tabHost.addTab(cajerosLink); // Adding link tab
+        tabHost.addTab(generalCajeros); // Adding general tab
         tabHost.addTab(creditos); // Adding creditos tab
 
     }

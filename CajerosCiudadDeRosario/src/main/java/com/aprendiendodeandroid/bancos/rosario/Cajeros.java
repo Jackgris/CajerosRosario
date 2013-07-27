@@ -1,42 +1,84 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
+import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
+
+import java.util.List;
+
 public class Cajeros extends ListFragment {
 
+    private final static  String TAG = "Cajeros";
+    private CajerosDAOImpl cajerosDAOImpl = new CajerosDAOImpl();
+    public final static int BANELCO = 1;
+    public final static int LINK = 2;
+    private int eleccion;
     OnHeadlineSelectedListener mCallback;
 
-    // The container Activity must implement this interface so the frag can deliver messages
+    // La activity que contenga este fragment deberia implementar esta interfaz para poder
+    // enviarle mensajes
     public interface OnHeadlineSelectedListener {
-        /** Called by HeadlinesFragment when a list item is selected */
+        /** ES llamado cuando un item de la lista es seleccionado */
         public void onArticleSelected(int position);
+    }
+
+    /**
+     * Debemos mantener un constructor vacio
+     */
+    public Cajeros(){
+
+    }
+
+    /**
+     * Este es el constructor de la clase cajeros, donde deberemos pasarle como parametro el numero
+     * que se corresponde a una de las redes de cajeros, para que nos muestre la lista completa
+     * de ellos
+     *
+     * @param eleccion este es un numero entero que se corresponde a una de las redes de cajeros
+     */
+    public Cajeros(int eleccion){
+        this.eleccion = eleccion;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // We need to use a different list item layout for devices older than Honeycomb
+
+        // Nosotros necesitamos usar diferentes lista de item en el layout, para versiones mas
+        //  viejas que Honeycomb
         int layout = android.R.layout.simple_list_item_1;
 
-        // Create an array adapter for the list view, using the Ipsum headlines array
-        setListAdapter(new ArrayAdapter<String>(getActivity(), layout, Ipsum.Headlines));
+        // Creamos un array adapter para ver la vista de la lista, vamos a usar los nombres de
+        // los cajeros para eso
+        setListAdapter(new ArrayAdapter<String>(getActivity(), layout,
+                nombreCajeros(getActivity().getApplicationContext(), eleccion)));//Ipsum.Headlines));
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        // When in two-pane layout, set the listview to highlight the selected list item
-        // (We do this during onStart because at the point the listview is available.)
-        if (getFragmentManager().findFragmentById(R.id.article_fragment) != null) {
-            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        // Cuando mostramos en el layout los dos fragment, configuramos el listview para que marque
+        // el item seleccionado
+        // (Realizamos esto durante el onStart porque en este punto el listview esta listo.)
+        if(eleccion == BANELCO){
+            if (getFragmentManager().findFragmentById(R.id.cajero_fragmentBanelco) != null) {
+                getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+            }
+        }else {
+            if (getFragmentManager().findFragmentById(R.id.cajero_fragmentLink) != null) {
+                getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+            }
         }
+
     }
 
     @Override
@@ -60,5 +102,30 @@ public class Cajeros extends ListFragment {
         
         // Set the item as checked to be highlighted when in two-pane layout
         getListView().setItemChecked(position, true);
+    }
+
+    private String[] nombreCajeros(Context context, int eleccion){
+
+        List<Cajero> mostrar;
+
+        if(eleccion == BANELCO){
+            mostrar = cajerosDAOImpl.consultaCajerosBanelco(context);
+        }else {
+            mostrar = cajerosDAOImpl.consultaCajerosLink(context);
+        }
+
+        String[] lista = new String[mostrar.size()];
+        String mostrarString;
+
+        int i = 0;
+        for (Cajero cajero : mostrar) {
+            mostrarString = cajero.getNombreBanco() + "\n";
+            mostrarString += cajero.getDireccion();
+
+            lista[i] = mostrarString;
+            i++;
+        }
+
+        return lista;
     }
 }
