@@ -3,6 +3,7 @@ package com.aprendiendodeandroid.bancos.rosario;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import com.aprendiendodeandroid.bancos.rosario.R;
@@ -14,6 +15,8 @@ public class ManageTabsActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // le quitamos la barra de titulo a la aplicacion
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         
         TabHost tabHost = getTabHost();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.view.Window;
 
 public class SplashScreen extends FragmentActivity{
 	protected EstadoSalvado data;
@@ -11,6 +12,8 @@ public class SplashScreen extends FragmentActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // le quitamos la barra de titulo a la aplicacion
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splashscreen);
 
 
