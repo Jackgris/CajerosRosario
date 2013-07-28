@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
@@ -49,12 +50,13 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
 
     @Override
     public void onArticleSelected(int position) {
+         // FIXME debe reparar la accion que se realiza en este metodo
 
         // Cuando el usuario elige uno de los elementos realizaremos algunas accion
 
         // Capturamos la seleccion que se realizo sobre nuestro layout
         CajeroFragment cajeroFragment = (CajeroFragment)
-                getSupportFragmentManager().findFragmentById(R.id.cajero_fragmentBanelco);
+                getSupportFragmentManager().findFragmentById(R.id.cajero);
 
         if (cajeroFragment != null) {
             // Si el cajero se puede ver en un segundo fragment en nuestra vista, realizamos

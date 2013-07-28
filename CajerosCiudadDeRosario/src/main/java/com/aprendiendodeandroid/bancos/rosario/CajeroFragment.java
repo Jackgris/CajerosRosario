@@ -50,8 +50,9 @@ public class CajeroFragment extends Fragment {
     }
 
     public void updateCajeroView(int position) {
-        TextView article = (TextView) getActivity().findViewById(R.id.cajero);
-        article.setText(Ipsum.Articles[position]);
+        TextView textoCajero = (TextView) getActivity().findViewById(R.id.cajero);
+//        article.setText(Ipsum.Articles[position]);
+        textoCajero.setText("Cajero numero " + position);
         mCurrentPosition = position;
     }
 

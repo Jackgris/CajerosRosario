@@ -49,7 +49,7 @@ public class CajerosLinkActivity extends FragmentActivity implements
 
         // Capturamos la seleccion que se realizo sobre nuestro layout
         CajeroFragment cajeroFragment = (CajeroFragment)
-                getSupportFragmentManager().findFragmentById(R.id.cajero_fragmentLink);
+                getSupportFragmentManager().findFragmentById(R.id.cajero);
 
         if (cajeroFragment != null) {
             // Si el cajero se puede ver en un segundo fragment en nuestra vista, realizamos
