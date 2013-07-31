@@ -13,9 +13,9 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
-                android:id="@+id/textViewcajero1"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/nombre"
+                android:id="@+id/textViewcajeroNombre"/>
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
@@ -35,15 +35,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView2"/>
+                android:text="@string/direccion"
+                android:id="@+id/textViewDireccion"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/cajeroDireccion"/>
+                android:id="@+id/cajeroDireccion"
+                android:singleLine="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/telefono"
+                android:id="@+id/textViewTelefono"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cajeroTelefono"/>
     </LinearLayout>
 
 </LinearLayout>
