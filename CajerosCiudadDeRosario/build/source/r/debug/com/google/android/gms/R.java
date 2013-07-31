@@ -89,9 +89,9 @@ public final class R {
 		public static final int common_google_play_services_update_title = 0x7f090013;
 		public static final int common_signin_button_text = 0x7f090014;
 		public static final int common_signin_button_text_long = 0x7f090015;
-		public static final int location_client_ulr_inactive_age_under_13 = 0x7f09001b;
-		public static final int location_client_ulr_inactive_age_unknown = 0x7f09001c;
-		public static final int location_client_ulr_inactive_unknown_restriction = 0x7f09001d;
+		public static final int location_client_ulr_inactive_age_under_13 = 0x7f09001c;
+		public static final int location_client_ulr_inactive_age_unknown = 0x7f09001d;
+		public static final int location_client_ulr_inactive_unknown_restriction = 0x7f09001e;
 	}
 	public static final class styleable {
 		public static final int[] MapAttrs = { 0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019 };

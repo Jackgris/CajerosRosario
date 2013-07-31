@@ -28,7 +28,7 @@ public class CajeroFragment extends Fragment {
         }
 
         // Inflamos el  layout para este fragment
-        return inflater.inflate(R.layout.cajero, container, false);
+        return inflater.inflate(R.layout.cajero2, container, false);
     }
 
     @Override
@@ -50,9 +50,14 @@ public class CajeroFragment extends Fragment {
     }
 
     public void updateCajeroView(int position) {
-        TextView textoCajero = (TextView) getActivity().findViewById(R.id.cajero);
-//        article.setText(Ipsum.Articles[position]);
-        textoCajero.setText("Cajero numero " + position);
+        // FIXME debo agregar el codigo para obtener los datos a mostrar de el cajero en particular
+        TextView textoNombre = (TextView) getActivity().findViewById(R.id.cajeroNombre);
+        textoNombre.setText("hola");
+        TextView textoDireccion = (TextView) getActivity().findViewById(R.id.cajeroDireccion);
+        textoDireccion.setText("hola");
+        TextView textoTelefono = (TextView) getActivity().findViewById(R.id.cajeroTelefono);
+        textoTelefono.setText("hola");
+
         mCurrentPosition = position;
     }
 
