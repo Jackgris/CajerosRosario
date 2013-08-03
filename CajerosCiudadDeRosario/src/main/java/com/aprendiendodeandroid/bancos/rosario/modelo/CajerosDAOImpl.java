@@ -97,6 +97,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                  //Recorremos el cursor hasta que no haya más registros
                  do {
                 	  cajero = new Cajero();
+                      int idCajero = cursor.getInt(0);
                       String banco = cursor.getString(1);
                       String calle = cursor.getString(3);
                       Integer altura = cursor.getInt(4);
@@ -107,6 +108,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                       cajero.setDireccion(calle + " " + altura);
                       cajero.setLatitud(latitud);
                       cajero.setLongitud(longitud);
+                      cajero.setIdCajero(idCajero);
                       
                       resultado.add(cajero);
                       
@@ -143,12 +145,14 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                  //Recorremos el cursor hasta que no haya más registros
                  do {
                 	  cajero = new Cajero();
+                      int idCajero = cursor.getInt(0);
                       String banco = cursor.getString(1);
                       String calle = cursor.getString(3);
                       Integer altura = cursor.getInt(4);
                       Integer latitud = cursor.getInt(5);
                       Integer longitud = cursor.getInt(6);
-                      
+
+                      cajero.setIdCajero(idCajero);
                       cajero.setNombreBanco(banco);
                       cajero.setDireccion(calle + " " + altura);
                       cajero.setLatitud(latitud);

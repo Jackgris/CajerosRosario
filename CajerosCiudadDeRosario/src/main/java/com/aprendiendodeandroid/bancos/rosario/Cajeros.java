@@ -26,7 +26,7 @@ public class Cajeros extends ListFragment {
     // enviarle mensajes
     public interface OnCajeroSeleccionadoListener {
         /** ES llamado cuando un item de la lista es seleccionado */
-        public void onCajeroSeleccionado(int position);
+        public void onCajeroSeleccionado(int position, int idCajero, int tipo);
     }
 
     /**
@@ -97,10 +97,24 @@ public class Cajeros extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        // Notify the parent activity of selected item
-        mCallback.onCajeroSeleccionado(position);
-        
-        // Set the item as checked to be highlighted when in two-pane layout
+
+        // Vamos a tomar el ID y el tipo de cajero seleccionado
+        List<Cajero> mostrar;
+
+        if(eleccion == BANELCO){
+            mostrar = cajerosDAOImpl.consultaCajerosBanelco(getActivity().getApplicationContext());
+        }else {
+            mostrar = cajerosDAOImpl.consultaCajerosLink(getActivity().getApplicationContext());
+        }
+
+        Cajero cajero = mostrar.get(position);
+        int idCajero = cajero.getIdCajero();
+
+        // Avisamos a la activity padre del item seleccionado
+        mCallback.onCajeroSeleccionado(position, idCajero, eleccion);
+
+        // Configuramos para que cuando el item es seleccionado se marque, cuando tenemos los dos
+        // fragments en el mismo layout
         getListView().setItemChecked(position, true);
     }
 

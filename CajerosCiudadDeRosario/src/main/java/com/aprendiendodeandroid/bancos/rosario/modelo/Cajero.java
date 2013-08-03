@@ -8,8 +8,21 @@ public class Cajero {
 	private int latitud;
 	private String nombreBanco;
 	private String tipoCajero;
-		
-	public String getDireccion() {
+    private int idCajero;
+
+    public String getTipoCajero() {
+        return tipoCajero;
+    }
+
+    public int getIdCajero() {
+        return idCajero;
+    }
+
+    public void setIdCajero(int idCajero) {
+        this.idCajero = idCajero;
+    }
+
+    public String getDireccion() {
 		return direccion;
 	}
 	public void setDireccion(String direccion) {

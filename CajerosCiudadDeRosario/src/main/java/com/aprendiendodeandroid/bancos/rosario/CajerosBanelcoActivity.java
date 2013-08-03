@@ -43,7 +43,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onCajeroSeleccionado(int position) {
+    public void onCajeroSeleccionado(int position, int idCajero, int eleccion) {
 
         // Cuando el usuario elige uno de los elementos realizaremos algunas accion
         // Capturamos la seleccion que se realizo sobre nuestro layout
