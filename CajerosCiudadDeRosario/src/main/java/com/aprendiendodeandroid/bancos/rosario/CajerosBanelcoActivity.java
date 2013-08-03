@@ -3,6 +3,7 @@ package com.aprendiendodeandroid.bancos.rosario;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 /**
  * Esta clase va a ser la encargada de manejar la vista de los cajeros Banelco
@@ -53,7 +54,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
         if (cajeroFragment != null) {
             // Si el cajero se puede ver en un segundo fragment en nuestra vista, realizamos
             // una llamada para actualizar el contenido de la vista
-            cajeroFragment.updateCajeroView(position);
+            cajeroFragment.updateCajeroView(position, idCajero, eleccion);
 
         } else {
             // Si no es posible verlo en un segundo fragment, entonces actulizamos nuestra vista
@@ -63,6 +64,10 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
             CajeroFragment nuevoCajeroFragment = new CajeroFragment();
             Bundle argumentos = new Bundle();
             argumentos.putInt(CajeroFragment.ARG_POSITION, position);
+            argumentos.putInt(CajeroFragment.TIPO_CAJERO, eleccion);
+            argumentos.putInt(CajeroFragment.ID_CAJERO, idCajero);
+
+            Log.d(TAG, "id cajero " +  idCajero + " posicion " + position +  " tipo cajero " + eleccion);
 
 
             nuevoCajeroFragment.setArguments(argumentos);

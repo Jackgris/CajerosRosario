@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -59,7 +60,7 @@ public class Cajeros extends ListFragment {
         // Creamos un array adapter para ver la vista de la lista, vamos a usar los nombres de
         // los cajeros para eso
         setListAdapter(new ArrayAdapter<String>(getActivity(), layout,
-                nombreCajeros(getActivity().getApplicationContext(), eleccion)));//Ipsum.Headlines));
+                nombreCajeros(getActivity().getApplicationContext(), eleccion)));
     }
 
     @Override
@@ -109,6 +110,8 @@ public class Cajeros extends ListFragment {
 
         Cajero cajero = mostrar.get(position);
         int idCajero = cajero.getIdCajero();
+
+        Log.d(TAG, "id cajero " +  idCajero + " posicion " + position);
 
         // Avisamos a la activity padre del item seleccionado
         mCallback.onCajeroSeleccionado(position, idCajero, eleccion);

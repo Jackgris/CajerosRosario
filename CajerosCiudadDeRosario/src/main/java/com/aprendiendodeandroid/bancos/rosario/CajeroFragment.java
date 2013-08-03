@@ -3,6 +3,7 @@ package com.aprendiendodeandroid.bancos.rosario;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,16 @@ import android.widget.Toast;
  */
 public class CajeroFragment extends Fragment {
 
+    // variables para el pasaje de datos
     final static String ARG_POSITION = "position";
-    int mCurrentPosition = -1;
-    private Button botonVerMapa;
+    final static String ID_CAJERO = "id_cajero";
+    final static String TIPO_CAJERO = "tipo_cajero";
+    private final static String TAG = "CajeroFragment";
 
-    // Estas son las variables a mostrar en el detalle
-    private String nombre;
-    private String direccion;
-    private String telefono;
+    int mCurrentPosition = -1;
+    int idCajero = 0;
+    int tipoCajero = 1;
+    private Button botonVerMapa;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -33,6 +36,8 @@ public class CajeroFragment extends Fragment {
         // Esto es principalmente necesario, cuando tenemos los dos panerles en el layout
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
+            idCajero = savedInstanceState.getInt(ID_CAJERO);
+            tipoCajero = savedInstanceState.getInt(TIPO_CAJERO);
         }
 
         // Inflamos el  layout para este fragment
@@ -50,14 +55,14 @@ public class CajeroFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             // le seteamos los argunmentos pasados
-            updateCajeroView(args.getInt(ARG_POSITION));
+            updateCajeroView(args.getInt(ARG_POSITION), args.getInt(ID_CAJERO), args.getInt(TIPO_CAJERO));
         } else if (mCurrentPosition != -1) {
             // Set article based on saved instance state defined during onCreateView
-            updateCajeroView(mCurrentPosition);
+            updateCajeroView(mCurrentPosition, args.getInt(ID_CAJERO), args.getInt(TIPO_CAJERO));
         }
     }
 
-    public void updateCajeroView(int position) {
+    public void updateCajeroView(int position, int idCajero, int tipoCajero) {
         // FIXME debo agregar el codigo para obtener los datos a mostrar de el cajero en particular
         TextView textoNombre = (TextView) getActivity().findViewById(R.id.cajeroNombre);
         textoNombre.setText("hola");
@@ -65,6 +70,8 @@ public class CajeroFragment extends Fragment {
         textoDireccion.setText("hola");
         TextView textoTelefono = (TextView) getActivity().findViewById(R.id.cajeroTelefono);
         textoTelefono.setText("hola");
+
+        Log.d(TAG, "id cajero " +  idCajero + " posicion " + position +  " tipo cajero " + tipoCajero);
 
         mCurrentPosition = position;
     }
@@ -81,7 +88,11 @@ public class CajeroFragment extends Fragment {
         botonVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
+
+                String mensaje  = "El id cajero: " + idCajero + " tipo cajero " + tipoCajero +
+                        " posiscion " + mCurrentPosition;
+
+                Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
             }
         });
     }

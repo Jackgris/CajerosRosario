@@ -18,7 +18,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
 		
 	/**
 	 * Con este metodo simplemente creamos una instancia de la base de datos
-	 * @param context
+	 * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
 	 */
 	public void cajerosAutomaticosBd(Context context) {
 	    try {
@@ -81,7 +81,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
 	@Override
 	public List<Cajero> consultaCajerosBanelco(Context context) {
 		List<Cajero> resultado = new ArrayList<Cajero>();
-		Cajero cajero = null;
+		Cajero cajero;
 		
 		final String SQL_CAJEROS_LINK = "SELECT * FROM " + ConstantesCajeros.TABLE_CAJEROS +
 				" WHERE " + ConstantesCajeros.COLUMN_RED + " IN ('Banelco')" ;
@@ -114,8 +114,10 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                       
                  } while(cursor.moveToNext());
             }
-                       
+
+            cursor.close();
             base.close();
+            bd.close();
         } catch(SQLException e) {
             Log.v("ejecutarSql", e.getMessage());
         }
@@ -162,8 +164,10 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                       
                  } while(cursor.moveToNext());
             }
-                       
+
+            cursor.close();
             base.close();
+            bd.close();
         } catch(SQLException e) {
             Log.v("ejecutarSql", e.getMessage());
         }
