@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Este es el fragment que va a contener la informacion del cajero
@@ -15,6 +17,7 @@ public class CajeroFragment extends Fragment {
 
     final static String ARG_POSITION = "position";
     int mCurrentPosition = -1;
+    private Button botonVerMapa;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -67,5 +70,22 @@ public class CajeroFragment extends Fragment {
 
         // Save the current article selection in case we need to recreate the fragment
         outState.putInt(ARG_POSITION, mCurrentPosition);
+    }
+
+    private void verEnElMapa(){
+        botonVerMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity().getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        botonVerMapa = (Button)getActivity().findViewById(R.id.buttonIrMapa);
+        verEnElMapa();
     }
 }

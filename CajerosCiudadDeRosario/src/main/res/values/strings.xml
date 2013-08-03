@@ -26,4 +26,5 @@
     <string name="telefono">Teléfono:</string>
     <string name="direccion">Dirección:</string>
     <string name="nombre">Nombre:</string>
+    <string name="ir_mapa">Ver en el Mapa</string>
   </resources>

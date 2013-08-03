@@ -65,4 +65,19 @@
                 android:id="@+id/cajeroTelefono"/>
     </LinearLayout>
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal|bottom">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ir_mapa"
+                android:id="@+id/buttonIrMapa"
+                />
+    </LinearLayout>
+
 </LinearLayout>
