@@ -6,6 +6,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.aprendiendodeandroid.bancos.rosario.CajeroFragment;
+import com.aprendiendodeandroid.bancos.rosario.Cajeros;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,8 @@ import java.util.List;
  *
  */
 public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
-		
+
+    private final static String TAG = "CajerosDAOImpl";
 	/**
 	 * Con este metodo simplemente creamos una instancia de la base de datos
 	 * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
@@ -176,10 +180,49 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
 		
 	}
 
-	@Override
-	public Cajero consultaUnCajero(Context context, String red, String direccion) {
-		// TODO Auto-generated method stub
-		return null;
-		
-	}
+    @Override
+    public Cajero consultaUnCajero(Context context, int red, int idCajero) {
+
+        Cajero cajero =  new Cajero();
+
+        final String consulta = "SELECT * FROM " + ConstantesCajeros.TABLE_CAJEROS +
+                " WHERE " + ConstantesCajeros.COLUMN_ID + "='" + idCajero + "'";
+
+        try {
+            DataBaseHelper bd = new DataBaseHelper(context, CAJEROSAUTOMATICOS, null, VERSION);
+            SQLiteDatabase base = bd.getWritableDatabase();
+            Cursor cursor = base.rawQuery(consulta, null);
+
+            //Nos aseguramos de que existe al menos un registro
+            if (cursor.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    cajero = new Cajero();
+                    String banco = cursor.getString(1);
+                    String calle = cursor.getString(3);
+                    Integer altura = cursor.getInt(4);
+                    Integer latitud = cursor.getInt(5);
+                    Integer longitud = cursor.getInt(6);
+                    String telefono = cursor.getString(7);
+
+                    cajero.setIdCajero(idCajero);
+                    cajero.setNombreBanco(banco);
+                    cajero.setDireccion(calle + " " + altura);
+                    cajero.setLatitud(latitud);
+                    cajero.setLongitud(longitud);
+                    cajero.setTelefonoBanco(telefono);
+
+                } while(cursor.moveToNext());
+            }
+
+            cursor.close();
+            base.close();
+            bd.close();
+        } catch(SQLException e) {
+            Log.e(TAG, "Funcion consultaUnCajero " +  e);
+        }
+
+        return cajero;
+    }
+
 }

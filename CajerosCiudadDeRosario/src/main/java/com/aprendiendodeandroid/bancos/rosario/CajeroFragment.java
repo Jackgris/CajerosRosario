@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
+import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAO;
+import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
+
 /**
  * Este es el fragment que va a contener la informacion del cajero
  */
@@ -64,13 +68,19 @@ public class CajeroFragment extends Fragment {
 
     public void updateCajeroView(int position, int idCajero, int tipoCajero) {
         // FIXME debo agregar el codigo para obtener los datos a mostrar de el cajero en particular
-        TextView textoNombre = (TextView) getActivity().findViewById(R.id.cajeroNombre);
-        textoNombre.setText("hola");
-        TextView textoDireccion = (TextView) getActivity().findViewById(R.id.cajeroDireccion);
-        textoDireccion.setText("hola");
-        TextView textoTelefono = (TextView) getActivity().findViewById(R.id.cajeroTelefono);
-        textoTelefono.setText("hola");
+        CajerosDAO cajerosDAO = new CajerosDAOImpl();
 
+        Cajero cajero = cajerosDAO.consultaUnCajero(getActivity().getApplicationContext(),
+                tipoCajero, idCajero);
+
+        TextView textoNombre = (TextView) getActivity().findViewById(R.id.cajeroNombre);
+        textoNombre.setText(cajero.getNombreBanco());
+        TextView textoDireccion = (TextView) getActivity().findViewById(R.id.cajeroDireccion);
+        textoDireccion.setText(cajero.getDireccion());
+        TextView textoTelefono = (TextView) getActivity().findViewById(R.id.cajeroTelefono);
+        textoTelefono.setText(cajero.getTelefonoBanco());
+
+        verEnElMapa(idCajero, tipoCajero);
         Log.d(TAG, "id cajero " +  idCajero + " posicion " + position +  " tipo cajero " + tipoCajero);
 
         mCurrentPosition = position;
@@ -84,7 +94,7 @@ public class CajeroFragment extends Fragment {
         outState.putInt(ARG_POSITION, mCurrentPosition);
     }
 
-    private void verEnElMapa(){
+    private void verEnElMapa(final int idCajero, final int tipoCajero){
         botonVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +112,6 @@ public class CajeroFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         botonVerMapa = (Button)getActivity().findViewById(R.id.buttonIrMapa);
-        verEnElMapa();
+
     }
 }

@@ -18,13 +18,13 @@ public interface CajerosDAO {
     
     /**
      * Solo vamos a necesitar el contexto para crear una instancia de la bd
-     * @param context
+     * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
      */
     public void cajerosAutomaticosBd(Context context);
     
     /**
      * Este metodo lo vamos a usar para poder ejecutar cualquier consulta sql a la bd
-     * @param context
+     * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
      * @param sql 
      */
     public void ejecutarSql(Context context, String sql);
@@ -32,22 +32,23 @@ public interface CajerosDAO {
     /**
      * Este metodo se encargara de devolvernos la totalidad de los datos de los cajeros de la 
      * red Banelco
-     * @param context
+     * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
      */
     public List<Cajero> consultaCajerosBanelco(Context context);
     
     /**
      * Este metodo se encargara de devolvernos la totalidad de los datos de los cajeros 
      * de la red Link
-     * @param context
+     * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
      */
     public List<Cajero> consultaCajerosLink(Context context);
     
     /**
      * Esta consulta se encargara de devolvernos simplemente uno solo de los cajeros que elijamos
-     * @param context
-     * @param red
-     * @param direccion
+     *
+     * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
+     * @param red este es el identificador del tipo de red de cajeros
+     * @param idCajero este es el identificador
      */
-    public Cajero consultaUnCajero(Context context, String red, String direccion);
+    public Cajero consultaUnCajero(Context context, int red, int idCajero);
 }
