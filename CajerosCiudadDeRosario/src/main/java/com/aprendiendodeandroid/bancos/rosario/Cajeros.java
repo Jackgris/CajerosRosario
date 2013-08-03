@@ -20,13 +20,13 @@ public class Cajeros extends ListFragment {
     public final static int BANELCO = 1;
     public final static int LINK = 2;
     private int eleccion;
-    OnHeadlineSelectedListener mCallback;
+    OnCajeroSeleccionadoListener mCallback;
 
     // La activity que contenga este fragment deberia implementar esta interfaz para poder
     // enviarle mensajes
-    public interface OnHeadlineSelectedListener {
+    public interface OnCajeroSeleccionadoListener {
         /** ES llamado cuando un item de la lista es seleccionado */
-        public void onArticleSelected(int position);
+        public void onCajeroSeleccionado(int position);
     }
 
     /**
@@ -88,7 +88,7 @@ public class Cajeros extends ListFragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception.
         try {
-            mCallback = (OnHeadlineSelectedListener) activity;
+            mCallback = (OnCajeroSeleccionadoListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
@@ -98,7 +98,7 @@ public class Cajeros extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Notify the parent activity of selected item
-        mCallback.onArticleSelected(position);
+        mCallback.onCajeroSeleccionado(position);
         
         // Set the item as checked to be highlighted when in two-pane layout
         getListView().setItemChecked(position, true);

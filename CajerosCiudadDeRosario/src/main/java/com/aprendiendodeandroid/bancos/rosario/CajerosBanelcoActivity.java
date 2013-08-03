@@ -1,23 +1,17 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
-
-import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
-import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
-
-import java.util.List;
 
 /**
  * Esta clase va a ser la encargada de manejar la vista de los cajeros Banelco
  */
 public class CajerosBanelcoActivity extends FragmentActivity implements
-	                                                            Cajeros.OnHeadlineSelectedListener{
+	                                                            Cajeros.OnCajeroSeleccionadoListener{
 
     private final static String TAG = "CajerosBanelcoActivity";
+    private Cajeros cajeros;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +30,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
             }
 
             // Creamos una instancia del fragment
-            Cajeros cajeros = new Cajeros(Cajeros.BANELCO);
+            cajeros = new Cajeros(Cajeros.BANELCO);
 
             // En caso de que la activity comenzo con algunas instrucciones en el intent,
             // podemos tomarlos y pasarcelo a nuestro fragment
@@ -49,11 +43,9 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onArticleSelected(int position) {
-         // FIXME debe reparar la accion que se realiza en este metodo
+    public void onCajeroSeleccionado(int position) {
 
         // Cuando el usuario elige uno de los elementos realizaremos algunas accion
-
         // Capturamos la seleccion que se realizo sobre nuestro layout
         CajeroFragment cajeroFragment = (CajeroFragment)
                 getSupportFragmentManager().findFragmentById(R.id.cajero);
@@ -71,6 +63,8 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
             CajeroFragment nuevoCajeroFragment = new CajeroFragment();
             Bundle argumentos = new Bundle();
             argumentos.putInt(CajeroFragment.ARG_POSITION, position);
+
+
             nuevoCajeroFragment.setArguments(argumentos);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

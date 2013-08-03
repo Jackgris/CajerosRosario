@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
  * Esta clase va a ser la encargada de manejar la vista de los cajeros de Red Link
  */
 public class CajerosLinkActivity extends FragmentActivity implements
-                                                                Cajeros.OnHeadlineSelectedListener {
+                                                                Cajeros.OnCajeroSeleccionadoListener{
 
     private final static String TAG = "CajerosLinkActivity";
 	
@@ -43,7 +43,7 @@ public class CajerosLinkActivity extends FragmentActivity implements
 	}
 
     @Override
-    public void onArticleSelected(int position) {
+    public void onCajeroSeleccionado(int position) {
 
         // Cuando el usuario elige uno de los elementos realizaremos algunas accion
 

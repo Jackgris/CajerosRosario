@@ -19,6 +19,11 @@ public class CajeroFragment extends Fragment {
     int mCurrentPosition = -1;
     private Button botonVerMapa;
 
+    // Estas son las variables a mostrar en el detalle
+    private String nombre;
+    private String direccion;
+    private String telefono;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
