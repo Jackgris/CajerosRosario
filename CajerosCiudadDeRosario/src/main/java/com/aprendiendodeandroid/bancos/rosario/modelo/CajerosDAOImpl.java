@@ -199,6 +199,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                 do {
                     cajero = new Cajero();
                     String banco = cursor.getString(1);
+                    String redCajero = cursor.getString(2);
                     String calle = cursor.getString(3);
                     Integer altura = cursor.getInt(4);
                     Integer latitud = cursor.getInt(5);
@@ -211,6 +212,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                     cajero.setLatitud(latitud);
                     cajero.setLongitud(longitud);
                     cajero.setTelefonoBanco(telefono);
+                    cajero.setTipoCajero(redCajero);
 
                 } while(cursor.moveToNext());
             }

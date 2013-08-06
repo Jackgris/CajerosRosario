@@ -19,6 +19,8 @@ import com.google.android.gms.maps.SupportMapFragment;
  */
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
+    public final static String MARCADOR = "marcador";
+    public final static String MARCADORES = "marcadores";
 	public static GoogleMap mapa;
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
@@ -101,5 +103,13 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		iniciamosLaEscucha();
-	}  
+	}
+
+    private void agregarMarcador(){
+        //FIXME con este metodo vamos a agregar un marcador al mapa
+    }
+
+    private void agregarListaMarcadore(){
+        // FIXME con este metodo vamos a agregar una lista de marcadores
+    }
 }

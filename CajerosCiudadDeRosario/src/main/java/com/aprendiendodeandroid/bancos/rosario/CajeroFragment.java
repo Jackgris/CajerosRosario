@@ -1,6 +1,7 @@
 
 package com.aprendiendodeandroid.bancos.rosario;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,8 @@ public class CajeroFragment extends Fragment {
     int idCajero = 0;
     int tipoCajero = 1;
     private Button botonVerMapa;
+    TabHost tabHost;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -73,6 +77,8 @@ public class CajeroFragment extends Fragment {
         Cajero cajero = cajerosDAO.consultaUnCajero(getActivity().getApplicationContext(),
                 tipoCajero, idCajero);
 
+        tabHost =  (TabHost) getActivity().getParent().findViewById(android.R.id.tabhost);
+
         TextView textoNombre = (TextView) getActivity().findViewById(R.id.cajeroNombre);
         textoNombre.setText(cajero.getNombreBanco());
         TextView textoDireccion = (TextView) getActivity().findViewById(R.id.cajeroDireccion);
@@ -80,8 +86,7 @@ public class CajeroFragment extends Fragment {
         TextView textoTelefono = (TextView) getActivity().findViewById(R.id.cajeroTelefono);
         textoTelefono.setText(cajero.getTelefonoBanco());
 
-        verEnElMapa(idCajero, tipoCajero);
-        Log.d(TAG, "id cajero " +  idCajero + " posicion " + position +  " tipo cajero " + tipoCajero);
+        verEnElMapa(cajero);
 
         mCurrentPosition = position;
     }
@@ -94,15 +99,20 @@ public class CajeroFragment extends Fragment {
         outState.putInt(ARG_POSITION, mCurrentPosition);
     }
 
-    private void verEnElMapa(final int idCajero, final int tipoCajero){
+    private void verEnElMapa(final Cajero cajero){
         botonVerMapa.setOnClickListener(new View.OnClickListener() {
+            final Context context = getActivity().getApplicationContext();
+
             @Override
             public void onClick(View view) {
 
-                String mensaje  = "El id cajero: " + idCajero + " tipo cajero " + tipoCajero +
-                        " posiscion " + mCurrentPosition;
+                String mensaje  = "Vamos a ver el cajero en el Mapa";
 
-                Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+                tabHost.setCurrentTab(0);
+
+                if(context != null){
+                    Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

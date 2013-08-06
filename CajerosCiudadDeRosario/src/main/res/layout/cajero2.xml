@@ -13,7 +13,6 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/nombre"
                 android:id="@+id/textViewcajeroNombre"/>
 
@@ -34,14 +33,12 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/direccion"
                 android:id="@+id/textViewDireccion"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/cajeroDireccion"
                 android:singleLine="false"/>
     </LinearLayout>
@@ -55,7 +52,6 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/telefono"
                 android:id="@+id/textViewTelefono"/>
 
