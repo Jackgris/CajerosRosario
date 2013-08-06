@@ -102,11 +102,14 @@ public class CajeroFragment extends Fragment {
     private void verEnElMapa(final Cajero cajero){
         botonVerMapa.setOnClickListener(new View.OnClickListener() {
             final Context context = getActivity().getApplicationContext();
+            final MapaGeneral mapaGeneral = new MapaGeneral();
 
             @Override
             public void onClick(View view) {
 
                 String mensaje  = "Vamos a ver el cajero en el Mapa";
+
+                // FIXME agregar el envio de datos a la tab del mapa
 
                 tabHost.setCurrentTab(0);
 

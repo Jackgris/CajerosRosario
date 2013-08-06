@@ -5,10 +5,15 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 
+import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerGPS;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 /**
  * Esta clase la vamos a utilizar para manejar nuestra ubicacion y la de diferentes marcadores
@@ -19,8 +24,8 @@ import com.google.android.gms.maps.SupportMapFragment;
  */
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
-    public final static String MARCADOR = "marcador";
     public final static String MARCADORES = "marcadores";
+    public final static String MARCADOR = "marcador";
 	public static GoogleMap mapa;
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
@@ -34,7 +39,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		context = getApplicationContext();
 		
         locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        
+
 		// obtenemos el mapa desde el fragment
 		mapa = (((SupportMapFragment)getSupportFragmentManager().
 		        findFragmentById(R.id.mapa)).getMap());
@@ -45,7 +50,14 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         }
 				
 		iniciamosLaEscucha();
-				
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null){
+            if(bundle.getBundle(MARCADOR) != null){
+                agregarUnMarcador();
+            }
+        }
     }
 	
 	/** 
@@ -105,11 +117,15 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		iniciamosLaEscucha();
 	}
 
-    private void agregarMarcador(){
+    private void agregarUnMarcador(){
         //FIXME con este metodo vamos a agregar un marcador al mapa
+
+        //        LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
+//
+//        mapa.addMarker(new MarkerOptions().position(ubicacion).title(cajero.getNombreBanco()));
     }
 
-    private void agregarListaMarcadore(){
+    public void agregarListaMarcadore(){
         // FIXME con este metodo vamos a agregar una lista de marcadores
     }
 }
