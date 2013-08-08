@@ -2,6 +2,8 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -74,8 +76,7 @@ public class CajeroFragment extends Fragment {
         // FIXME debo agregar el codigo para obtener los datos a mostrar de el cajero en particular
         CajerosDAO cajerosDAO = new CajerosDAOImpl();
 
-        Cajero cajero = cajerosDAO.consultaUnCajero(getActivity().getApplicationContext(),
-                tipoCajero, idCajero);
+        Cajero cajero = cajerosDAO.consultaUnCajero(getActivity().getApplicationContext(), idCajero);
 
         tabHost =  (TabHost) getActivity().getParent().findViewById(android.R.id.tabhost);
 
@@ -102,7 +103,6 @@ public class CajeroFragment extends Fragment {
     private void verEnElMapa(final Cajero cajero){
         botonVerMapa.setOnClickListener(new View.OnClickListener() {
             final Context context = getActivity().getApplicationContext();
-            final MapaGeneral mapaGeneral = new MapaGeneral();
 
             @Override
             public void onClick(View view) {
@@ -111,6 +111,12 @@ public class CajeroFragment extends Fragment {
 
                 // FIXME agregar el envio de datos a la tab del mapa
 
+                SharedPreferences settings = getActivity().getSharedPreferences("Cajeros", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("cajero", cajero.getIdCajero());
+                editor.commit();
+
+                // configuramos la tab del mapa
                 tabHost.setCurrentTab(0);
 
                 if(context != null){

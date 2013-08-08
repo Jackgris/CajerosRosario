@@ -1,16 +1,21 @@
 package com.aprendiendodeandroid.bancos.rosario;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
+import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAO;
+import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerGPS;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -24,15 +29,16 @@ import java.util.List;
  */
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
-    public final static String MARCADORES = "marcadores";
-    public final static String MARCADOR = "marcador";
+    private static final String TAG = "MapaGeneral";
 	public static GoogleMap mapa;
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
 	private LocationListenerGPS locationListenerGPS = new LocationListenerGPS();
 	public static Context context;
-	
-	@Override
+    private static Bundle contenedor = null;
+    private SharedPreferences settings;
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mapageneral);
@@ -48,16 +54,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         if(mapa != null){
             mapa.setMyLocationEnabled(true);
         }
-				
-		iniciamosLaEscucha();
 
-        Bundle bundle = getIntent().getExtras();
-
-        if(bundle != null){
-            if(bundle.getBundle(MARCADOR) != null){
-                agregarUnMarcador();
-            }
-        }
     }
 	
 	/** 
@@ -95,8 +92,19 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		locationManager.removeUpdates(locationListenerGPS);
 		locationManager.removeUpdates(locationListenerNET);
 	}
-	
-	/**
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        settings = getSharedPreferences("Cajeros", 0);
+
+        if(settings.getInt("cajero", 0) != 0){
+            agregarUnMarcador();
+        }
+    }
+
+    /**
 	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion 
 	 */
 	@Override
@@ -120,12 +128,30 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
     private void agregarUnMarcador(){
         //FIXME con este metodo vamos a agregar un marcador al mapa
 
-        //        LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
-//
-//        mapa.addMarker(new MarkerOptions().position(ubicacion).title(cajero.getNombreBanco()));
+        CajerosDAO cajerosDAO = new CajerosDAOImpl();
+        Cajero cajero = cajerosDAO.consultaUnCajero(getApplicationContext(),
+                settings.getInt("cajero", 0));
+
+        Log.d(TAG, "Nombre Banco " + cajero.getNombreBanco() + " latitud " + cajero.getLatitud() +
+                " longitud " + cajero.getLongitud());
+
+        String nombre = cajero.getNombreBanco();
+
+        LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
+
+        mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+
     }
 
     public void agregarListaMarcadore(){
         // FIXME con este metodo vamos a agregar una lista de marcadores
+    }
+
+    public static Bundle getContenedor() {
+        return contenedor;
+    }
+
+    public static void setContenedor(Bundle contenedor) {
+        MapaGeneral.contenedor = contenedor;
     }
 }

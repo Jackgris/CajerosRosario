@@ -181,7 +181,7 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
 	}
 
     @Override
-    public Cajero consultaUnCajero(Context context, int red, int idCajero) {
+    public Cajero consultaUnCajero(Context context, int idCajero) {
 
         Cajero cajero =  new Cajero();
 
@@ -202,8 +202,8 @@ public class CajerosDAOImpl implements ConstantesCajeros, CajerosDAO{
                     String redCajero = cursor.getString(2);
                     String calle = cursor.getString(3);
                     Integer altura = cursor.getInt(4);
-                    Integer latitud = cursor.getInt(5);
-                    Integer longitud = cursor.getInt(6);
+                    Double latitud = cursor.getDouble(5);
+                    Double longitud = cursor.getDouble(6);
                     String telefono = cursor.getString(7);
 
                     cajero.setIdCajero(idCajero);

@@ -4,8 +4,8 @@ public class Cajero {
 
 	private String direccion;
 	private String telefonoBanco;
-	private int longitud;
-	private int latitud;
+	private double longitud;
+	private double latitud;
 	private String nombreBanco;
 	private String tipoCajero;
     private int idCajero;
@@ -34,16 +34,16 @@ public class Cajero {
 	public void setTelefonoBanco(String telefonoBanco) {
 		this.telefonoBanco = telefonoBanco;
 	}
-	public int getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(int longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
-	public int getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(int latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 	public String getNombreBanco() {

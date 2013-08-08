@@ -47,8 +47,7 @@ public interface CajerosDAO {
      * Esta consulta se encargara de devolvernos simplemente uno solo de los cajeros que elijamos
      *
      * @param context contexto actual de la aplicacion necesario para acceder a la base de datos
-     * @param red este es el identificador del tipo de red de cajeros
      * @param idCajero este es el identificador
      */
-    public Cajero consultaUnCajero(Context context, int red, int idCajero);
+    public Cajero consultaUnCajero(Context context, int idCajero);
 }
