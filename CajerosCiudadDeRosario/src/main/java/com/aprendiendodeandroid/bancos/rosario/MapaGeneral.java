@@ -96,13 +96,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        settings = getSharedPreferences("Cajeros", 0);
-
-        if(settings.getInt("cajero", 0) != 0){
-            agregarUnMarcador();
-        }
-    }
+   }
 
     /**
 	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion 
@@ -123,6 +117,11 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		iniciamosLaEscucha();
+
+        settings = getSharedPreferences("Cajeros", 0);
+        if(settings.getInt("cajero", 0) != 0){
+            agregarUnMarcador();
+        }
 	}
 
     private void agregarUnMarcador(){
