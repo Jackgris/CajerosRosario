@@ -27,4 +27,10 @@
     <string name="direccion">Dirección:</string>
     <string name="nombre">Nombre:</string>
     <string name="ir_mapa">Ver en el Mapa</string>
+
+    <!-- En el layout del Mapa -->
+    <string name="centrar_mapa">Centrar\nMapa</string>
+    <string name="cajeros_banelco">Cajeros\nRed Banelco</string>
+    <string name="cajeros_link">Cajeros\nRed Link</string>
+
   </resources>

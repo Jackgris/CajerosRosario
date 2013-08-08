@@ -7,14 +7,18 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAO;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerGPS;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -22,6 +26,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Esta clase la vamos a utilizar para manejar nuestra ubicacion y la de diferentes marcadores
@@ -40,6 +46,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	public static Context context;
     private SharedPreferences settings;
     private static Location location = null;
+    private Button botonCentrarMapa;
+    private Button botonCajerosBanelco;
+    private Button botonCajerosLink;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +61,19 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		// obtenemos el mapa desde el fragment
 		mapa = (((SupportMapFragment)getSupportFragmentManager().
 		        findFragmentById(R.id.mapa)).getMap());
+
+        botonCajerosBanelco = (Button)findViewById(R.id.buttonCajerosBanelco);
+        botonCajerosLink = (Button)findViewById(R.id.buttonCajerosLink);
+        botonCentrarMapa = (Button)findViewById(R.id.buttonCentrarMapa);
 		
 		// seteamos para que este el boton de buscar nuestra ubicacion activado
-        if(mapa != null){
-            mapa.setMyLocationEnabled(true);
-        }
+//        if(mapa != null){
+//            mapa.setMyLocationEnabled(true);
+//        }
 
+        centrarMapa();
+        mostrarCajerosBanelco();
+        mostrarCajerosRedLink();
     }
 	
 	/** 
@@ -99,6 +115,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
    }
 
     /**
@@ -153,12 +170,67 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
             dibujoLinea.add(ubicacion);
             dibujoLinea.add(miUbicacion);
 
-            Polyline linea = mapa.addPolyline(dibujoLinea);
+            mapa.addPolyline(dibujoLinea);
         }
     }
 
     public void agregarListaMarcadore(){
         // FIXME con este metodo vamos a agregar una lista de marcadores
+    }
+
+    /**
+     * Accion boton centrar mapa
+     */
+    private void centrarMapa(){
+        botonCentrarMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moverMapa();
+            }
+        });
+    }
+
+    /**
+     * Accion boton mostrar cajeros banelco
+     */
+    private void mostrarCajerosBanelco(){
+        botonCajerosBanelco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    /**
+     * Accion boton mostrar cajeros red link
+     */
+    private void mostrarCajerosRedLink(){
+        botonCajerosLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    /**
+     * Vamos a centrar el mapa, en la ultima ubicacion que alla tomado el GPS
+     */
+    private void moverMapa(){
+
+        if(location != null){
+            LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(miUbicacion)      // seteamos el centro del mapa en la posicion actual
+                    .zoom(14)                   // configuramos el zoom
+                    .bearing(90)                // seteamos la orientacion hacia el este
+                    .tilt(30)                   // configuramos el angulo de la camara a 30 grados
+                    .build();                   // Una vez seteado los parametros, construimos el objetos
+
+            // ubicamos nuestra posicion en el mapa, para que sea centrado ahi, con un angulo y vista
+            mapa.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
     }
 
     public static void setLocation(Location location) {
