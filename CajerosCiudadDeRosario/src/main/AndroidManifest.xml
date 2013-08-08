@@ -28,7 +28,8 @@
             android:theme="@style/AppTheme"
             android:allowBackup="false" >
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
-                   android:value="AIzaSyBkVNA7kGDX2EBEh-_Jiw-IOb53uoWe6_8"/>
+                   android:value="AIzaSyD0aL0bRgdlZC7WoMO10kPyqjDECw03VZ8"/>
+                   <!--  key de la notebook android:value="AIzaSyBkVNA7kGDX2EBEh-_Jiw-IOb53uoWe6_8"/>-->
 
         <activity android:name=".SplashScreen"
                   android:label="@string/title_activity_main">
