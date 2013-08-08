@@ -40,8 +40,10 @@ public class LocationListenerGPS implements LocationListener{
 		.bearing(90)                // seteamos la orientacion hacia el este
 		.tilt(30)                   // configuramos el angulo de la camara a 30 grados
 		.build();                   // Una vez seteado los parametros, construimos el objetos
-	      
-      // ubicamos nuestra posicion en el mapa, para que sea centrado ahi, con un angulo y vista
+
+      MapaGeneral.setLocation(location);
+
+        // ubicamos nuestra posicion en el mapa, para que sea centrado ahi, con un angulo y vista
       mapa.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }           
 

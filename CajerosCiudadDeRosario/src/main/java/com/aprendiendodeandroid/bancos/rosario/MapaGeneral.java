@@ -2,6 +2,7 @@ package com.aprendiendodeandroid.bancos.rosario;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
@@ -35,8 +38,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
 	private LocationListenerGPS locationListenerGPS = new LocationListenerGPS();
 	public static Context context;
-    private static Bundle contenedor = null;
     private SharedPreferences settings;
+    private static Location location = null;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +110,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 		locationManager.removeUpdates(locationListenerGPS);
 		locationManager.removeUpdates(locationListenerNET);
 
+        // limpiamos nuestro mapa al salir del mismo
         mapa.clear();
 	}
 	
@@ -124,33 +128,40 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         }
 	}
 
+    /**
+     * Con este metodo vamos a agregar un marcador al mapa, en este caso almacenado en nuestro
+     * {@link SharedPreferences}
+     */
     private void agregarUnMarcador(){
-        //FIXME con este metodo vamos a agregar un marcador al mapa
 
         CajerosDAO cajerosDAO = new CajerosDAOImpl();
         Cajero cajero = cajerosDAO.consultaUnCajero(getApplicationContext(),
                 settings.getInt("cajero", 0));
 
-        Log.d(TAG, "Nombre Banco " + cajero.getNombreBanco() + " latitud " + cajero.getLatitud() +
-                " longitud " + cajero.getLongitud());
-
         String nombre = cajero.getNombreBanco();
 
+        // armamos la ubicacion del marcador
         LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
 
+        // agregamos el marcador a nuestro mapa
         mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
 
+        if(location != null){
+            LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
+
+            PolylineOptions dibujoLinea = new PolylineOptions();
+            dibujoLinea.add(ubicacion);
+            dibujoLinea.add(miUbicacion);
+
+            Polyline linea = mapa.addPolyline(dibujoLinea);
+        }
     }
 
     public void agregarListaMarcadore(){
         // FIXME con este metodo vamos a agregar una lista de marcadores
     }
 
-    public static Bundle getContenedor() {
-        return contenedor;
-    }
-
-    public static void setContenedor(Bundle contenedor) {
-        MapaGeneral.contenedor = contenedor;
+    public static void setLocation(Location location) {
+        MapaGeneral.location = location;
     }
 }
