@@ -23,10 +23,12 @@ public class Cajeros extends ListFragment {
     private int eleccion;
     OnCajeroSeleccionadoListener mCallback;
 
-    // La activity que contenga este fragment deberia implementar esta interfaz para poder
-    // enviarle mensajes
+    /**
+     * La activity que contenga este fragment deberia implementar esta interfaz para poder
+     * enviarle mensajes
+     */
     public interface OnCajeroSeleccionadoListener {
-        /** ES llamado cuando un item de la lista es seleccionado */
+        /** Es llamado cuando un item de la lista es seleccionado */
         public void onCajeroSeleccionado(int position, int idCajero, int tipo);
     }
 
@@ -86,13 +88,13 @@ public class Cajeros extends ListFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception.
+        // Con esto nos aseguramos de que la actividad que lo contenga tendra que implementar
+        // la interfaz callback. Si no, nos lanzara una excepcion.
         try {
             mCallback = (OnCajeroSeleccionadoListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " deberia implementar OnCajeroSeleccionadoListener");
         }
     }
 

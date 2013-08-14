@@ -24,7 +24,7 @@ public class CajerosBanelcoActivity extends FragmentActivity implements
         // conteinerbanelco FrameLayout. Si es asi, deberiamos agregar el fragment de tipo cajero
         if (findViewById(R.id.conteinerbanelco) != null) {
 
-            // Sin enbargo, si vamos a restaurar desde un estado anterior,
+            // Sin embargo, si vamos a restaurar desde un estado anterior,
             // entonces no necesitamos realizar nada, asi que simplemente retornamos
             // o podriamos cambiar y actualizar algunas cosas del fragment.
             if (savedInstanceState != null) {

@@ -67,7 +67,7 @@ public class CajeroFragment extends Fragment {
             // le seteamos los argunmentos pasados
             updateCajeroView(args.getInt(ARG_POSITION), args.getInt(ID_CAJERO), args.getInt(TIPO_CAJERO));
         } else if (mCurrentPosition != -1) {
-            // Set article based on saved instance state defined during onCreateView
+            // Canfigruamos el cajero en basandonos en el estado definido durante el onCreateView
             updateCajeroView(mCurrentPosition, args.getInt(ID_CAJERO), args.getInt(TIPO_CAJERO));
         }
     }
@@ -96,7 +96,7 @@ public class CajeroFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // Save the current article selection in case we need to recreate the fragment
+        // guardamos el cajero actual en caso de que tengamos que recrear el fragment
         outState.putInt(ARG_POSITION, mCurrentPosition);
     }
 
