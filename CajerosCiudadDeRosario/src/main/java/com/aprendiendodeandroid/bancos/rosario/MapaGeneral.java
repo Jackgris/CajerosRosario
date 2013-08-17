@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAO;
@@ -39,6 +40,8 @@ import java.util.TimerTask;
 public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
     private static final String TAG = "MapaGeneral";
+    private static final int BANELCO = 1;
+    private static final int LINK = 2;
 	public static GoogleMap mapa;
 	private LocationManager locationManager;
 	private LocationListenerNetwork locationListenerNET = new LocationListenerNetwork();
@@ -174,8 +177,38 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         }
     }
 
-    public void agregarListaMarcadore(){
-        // FIXME con este metodo vamos a agregar una lista de marcadores
+    private void agregarListaMarcadore(int tipoCajero){
+        List<Cajero> cajeros;
+        CajerosDAO cajerosDAO = new CajerosDAOImpl();
+
+        if(tipoCajero == BANELCO){
+            cajeros = cajerosDAO.consultaCajerosBanelco(getApplicationContext());
+
+            for(Cajero cajero : cajeros){
+                String nombre = cajero.getNombreBanco();
+
+                // armamos la ubicacion del marcador
+                LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
+
+                // agregamos el marcador a nuestro mapa
+                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+            }
+
+        }
+
+        if(tipoCajero == LINK){
+            cajeros = cajerosDAO.consultaCajerosLink(getApplicationContext());
+
+            for(Cajero cajero : cajeros){
+                String nombre = cajero.getNombreBanco();
+
+                // armamos la ubicacion del marcador
+                LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
+
+                // agregamos el marcador a nuestro mapa
+                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+            }
+        }
     }
 
     /**
@@ -197,7 +230,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         botonCajerosBanelco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                agregarListaMarcadore(BANELCO);
             }
         });
     }
@@ -209,7 +242,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         botonCajerosLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                agregarListaMarcadore(LINK);
             }
         });
     }
