@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Esta clase se va a encargar de la creacion de la base de datos
  * @author gabriel
@@ -565,5 +568,30 @@ public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajero
 
 		}
 	}
+
+    /**
+     * Con este metodo vamos a realizar toda la carga de los cajeros en nuestra aplicacion
+     *
+     * @param db necesario para poder ejecutar el SQL
+     */
+    private void cargarDatosCajeros(SQLiteDatabase db){
+
+        List<Cajero> listaCajeros = new ArrayList<Cajero>();
+
+        // FIXME deberia poder cargar la lista de cajeros
+
+        for (Cajero cajero : listaCajeros){
+
+            final String insert = "INSERT INTO " + TABLE_CAJEROS + "("
+                    + COLUMN_BANCO + "," + COLUMN_RED + "," + COLUMN_CALLE + "," + COLUMN_ALTURA + ","
+                    + COLUMN_LATITUD + "," + COLUMN_LONGITUD + "," + COLUMN_TELEFONO + ") VALUES (" +
+                    "'" + cajero.getNombreBanco() + "','" + cajero.getTipoCajero()+ "','" +
+                    cajero.getCalle() + "', '" + cajero.getAltura() + "', " +
+                    "'" + cajero.getLatitud() + "','" + cajero.getLongitud() + "','" +
+                    cajero.getTelefonoBanco() + "')";
+
+            db.execSQL(insert);
+        }
+    }
 
 }

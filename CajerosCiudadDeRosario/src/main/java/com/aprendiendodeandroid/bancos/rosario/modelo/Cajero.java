@@ -9,6 +9,24 @@ public class Cajero {
 	private String nombreBanco;
 	private String tipoCajero;
     private int idCajero;
+    private String calle;
+    private int altura;
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
 
     public String getTipoCajero() {
         return tipoCajero;
