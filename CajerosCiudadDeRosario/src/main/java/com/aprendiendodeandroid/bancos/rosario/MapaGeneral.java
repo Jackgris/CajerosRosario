@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.aprendiendodeandroid.bancos.rosario.modelo.Cajero;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAO;
 import com.aprendiendodeandroid.bancos.rosario.modelo.CajerosDAOImpl;
+import com.aprendiendodeandroid.bancos.rosario.modelo.DataBaseHelper;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerGPS;
 import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -69,11 +70,6 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         botonCajerosBanelco = (Button)findViewById(R.id.buttonCajerosBanelco);
         botonCajerosLink = (Button)findViewById(R.id.buttonCajerosLink);
         botonCentrarMapa = (Button)findViewById(R.id.buttonCentrarMapa);
-		
-		// seteamos para que este el boton de buscar nuestra ubicacion activado
-//        if(mapa != null){
-//            mapa.setMyLocationEnabled(true);
-//        }
 
         centrarMapa();
         mostrarCajerosBanelco();
@@ -164,16 +160,29 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         // armamos la ubicacion del marcador
         LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
 
-        // agregamos el marcador a nuestro mapa
-        mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+
+        if(cajero.getTipoCajero().trim().equals(DataBaseHelper.BANELCO)){
+            // agregamos el marcador a nuestro mapa
+            mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
+                    .snippet(cajero.getDireccion())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.banelco_icono)));
+
+        }else if(cajero.getTipoCajero().trim().equals(DataBaseHelper.RED_LINK)){
+            // agregamos el marcador a nuestro mapa
+            mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
+                    .snippet(cajero.getDireccion())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_link_icono)));
+        }
 
         if(location != null){
             LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
 
+            // configuramos la linea que se va a mostrar entre el cajero y nuestra ubicacion
             PolylineOptions dibujoLinea = new PolylineOptions();
             dibujoLinea.add(ubicacion);
             dibujoLinea.add(miUbicacion);
-
+            dibujoLinea.width(2);
+            
             mapa.addPolyline(dibujoLinea);
         }
     }

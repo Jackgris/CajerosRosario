@@ -35,7 +35,7 @@ public class ManageTabsActivity extends TabActivity {
         
         // Tab for cajeros Red Link
         TabSpec cajerosLink = tabHost.newTabSpec("Red Link");
-        cajerosLink.setIndicator("", getResources().getDrawable(R.drawable.pagos_link));
+        cajerosLink.setIndicator("", getResources().getDrawable(R.drawable.logo_red_link));
         Intent redLinkIntent = new Intent(this, CajerosLinkActivity.class);
         cajerosLink.setContent(redLinkIntent);
         

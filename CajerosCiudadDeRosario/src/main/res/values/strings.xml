@@ -22,6 +22,9 @@
     <string name="not_support_gps">GPS provider not supported</string>
     <string name="not_support_network">Network provider not supported</string>
 
+    <!-- Layout del Mapa General-->
+    <string name="aqui_te_encuentras">Aquí es donde te encuentras</string>
+
     <!-- En el layout de los detalles del cajero -->
     <string name="telefono">Teléfono:</string>
     <string name="direccion">Dirección:</string>

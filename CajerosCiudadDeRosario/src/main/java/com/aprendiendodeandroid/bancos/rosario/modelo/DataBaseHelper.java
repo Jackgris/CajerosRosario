@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper implements ConstantesCajeros {
 
+    // tipos de caejeros posibles
+    public static final String RED_LINK = "Link";
+    public static final String BANELCO = "Banelco";
+
     /*
      * Estas van a ser las consultas con las que se van a crear las tablas e insertar los datos por
      * defecto, que van a estar dentro de nuestra bd

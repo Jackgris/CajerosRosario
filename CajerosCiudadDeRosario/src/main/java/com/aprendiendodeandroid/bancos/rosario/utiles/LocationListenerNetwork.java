@@ -27,7 +27,7 @@ public class LocationListenerNetwork implements LocationListener{
         mapa = MapaGeneral.mapa;
 
         actual = mapa.addMarker(new MarkerOptions().position(latLng).title(
-                "En esta parte de Rosario te encuentras"));
+                "Aquí es donde te encuentras"));
 
 //        Log.d("Localizacion", "Valor: " + location.toString() + " latitud: " + lat +
 //              " logitud: " + lng + "Valor al mapa" + latLng);
