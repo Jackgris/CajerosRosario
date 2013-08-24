@@ -93,7 +93,6 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	    locationManager.getProvider(locationManager.getBestProvider(LocationListenerGPS.
 	            crearCriteriaGPS(), false));
 
-	  // FIXME tengo que comprobar en realidad cada cierto tiempo si el GPS tomo ubicacion
 	  if(locationListenerGPS.getActual() != null){
 		  // usamos el proveedor que tiene mayor precision... le agregamos el listener para actualizar
 		  locationManager.requestLocationUpdates(high.getName(), 0, 0f, locationListenerGPS);
@@ -105,13 +104,20 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 	}
 
 	/**
-	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion	
+	 * Vamos a detener la escucha de nuestros listener y ah configurar como que no fueron
+     * seleccionados cajeros
 	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
 		locationManager.removeUpdates(locationListenerGPS);
 		locationManager.removeUpdates(locationListenerNET);
+
+        // eliminamos la seleccion realizada anteriormente
+        settings = getSharedPreferences("Cajeros", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("cajero", 0);
+        editor.commit();
 	}
 
     @Override
@@ -121,7 +127,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
    }
 
     /**
-	 * Vamos a detener la escucha de nuestro listener y todo tipo de actualizacion 
+	 * Vamos a detener la escucha de nuestro listener y a limpiar el mapa
 	 */
 	@Override
 	protected void onPause() {
@@ -191,8 +197,10 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         if(location != null){
 
             // configuramos la linea que se va a mostrar entre el cajero y nuestra ubicacion
+            // FIXME agregar el calculo del tercer punto para formar  el triangulo y la ruta quede mejor
             PolylineOptions dibujoLinea = new PolylineOptions();
             dibujoLinea.add(ubicacion);
+            dibujoLinea.add(calcularTercerPunto(miUbicacion, ubicacion));
             dibujoLinea.add(miUbicacion);
             dibujoLinea.width(2);
 
@@ -355,5 +363,28 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
             mapa.addMarker(new MarkerOptions().position(miUbicacion).title(
                     "Aquí es donde te encuentras"));
         }
+    }
+
+    /**
+     * Con este metodo vamos a obtener el tercer punto, para obtener un dibujo del recorrido mas
+     * real
+     *
+     * @param primera esta es la posicion actual donde estamos ubicados
+     * @param segunda esta es la posicion del cajero
+     * @return nos devuelve un objeto {@link LatLng} que representa el tercer punto del triangulo
+     */
+    private LatLng calcularTercerPunto(LatLng primera, LatLng segunda){
+
+        double s = 1 / (Math.sqrt(3));
+
+        double lat1 = primera.latitude;
+        double long1 = primera.longitude;
+        double lat2 = segunda.latitude;
+        double long2 = segunda.longitude;
+
+        double lat3 = lat2 + s * (long1 - long2);
+        double long3 = long2 + s * (lat2 - lat1);
+
+        return new LatLng(lat3, long3);
     }
 }

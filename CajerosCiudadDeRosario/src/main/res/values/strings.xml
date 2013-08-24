@@ -32,9 +32,9 @@
     <string name="ir_mapa">Ver en el Mapa</string>
 
     <!-- En el layout del Mapa -->
-    <string name="centrar_mapa">Centrar\nMapa</string>
-    <string name="cajeros_banelco">Cajeros\nRed Banelco</string>
-    <string name="cajeros_link">Cajeros\nRed Link</string>
+    <string name="centrar_mapa">Centrar</string>
+    <string name="cajeros_banelco">Banelco</string>
+    <string name="cajeros_link">Red Link</string>
 
     <!-- En el SplashScreen-->
     <string name="descripccion_imagen">Imagen de un cajero</string>
