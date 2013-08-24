@@ -33,4 +33,7 @@
     <string name="cajeros_banelco">Cajeros\nRed Banelco</string>
     <string name="cajeros_link">Cajeros\nRed Link</string>
 
+    <!-- En el SplashScreen-->
+    <string name="descripccion_imagen">Imagen de un cajero</string>
+
   </resources>

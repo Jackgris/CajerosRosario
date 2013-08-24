@@ -19,6 +19,7 @@ import com.aprendiendodeandroid.bancos.rosario.utiles.LocationListenerNetwork;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -191,7 +192,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
                 LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
 
                 // agregamos el marcador a nuestro mapa
-                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
+                        .snippet(cajero.getDireccion())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.banelco_icono)));
             }
 
         }
@@ -206,7 +209,9 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
                 LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
 
                 // agregamos el marcador a nuestro mapa
-                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre));
+                mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
+                        .snippet(cajero.getDireccion())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_link_icono)));
             }
         }
     }

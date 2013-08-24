@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import com.aprendiendodeandroid.bancos.rosario.R;
 
 @SuppressWarnings("deprecation")
 public class ManageTabsActivity extends TabActivity {
@@ -23,32 +22,32 @@ public class ManageTabsActivity extends TabActivity {
         
         // Tab for cajeros en general
         TabSpec generalCajeros = tabHost.newTabSpec("Todos los cajeros");
-        generalCajeros.setIndicator("Descripcion", getResources().getDrawable(R.drawable.icon_photos_tab));
+        generalCajeros.setIndicator("", getResources().getDrawable(R.drawable.descripccion));
         Intent generalIntent = new Intent(this, AllCajerosActivity.class);
         generalCajeros.setContent(generalIntent);
         
         // Tab for cajeros Banelco
         TabSpec cajerosBanelco = tabHost.newTabSpec("Banelco");
         // setting Title and Icon for the Tab
-        cajerosBanelco.setIndicator("Banelco", getResources().getDrawable(R.drawable.icon_songs_tab));
+        cajerosBanelco.setIndicator("", getResources().getDrawable(R.drawable.logo_banelco));
         Intent banelcoIntent = new Intent(this, CajerosBanelcoActivity.class);
         cajerosBanelco.setContent(banelcoIntent);
         
         // Tab for cajeros Red Link
         TabSpec cajerosLink = tabHost.newTabSpec("Red Link");
-        cajerosLink.setIndicator("Red Link", getResources().getDrawable(R.drawable.icon_videos_tab));
+        cajerosLink.setIndicator("", getResources().getDrawable(R.drawable.pagos_link));
         Intent redLinkIntent = new Intent(this, CajerosLinkActivity.class);
         cajerosLink.setContent(redLinkIntent);
         
-     // Tab for CreditosActivity
+        // Tab for CreditosActivity
         TabSpec creditos = tabHost.newTabSpec("Creditos");
-        creditos.setIndicator("Creditos", getResources().getDrawable(R.drawable.icon_photos_tab));
+        creditos.setIndicator("", getResources().getDrawable(R.drawable.desarrollador));
         Intent creditosIntent = new Intent(this, CreditosActivity.class);
         creditos.setContent(creditosIntent);
         
-     // Tab for Mapa General
+        // Tab for Mapa General
         TabSpec mapageneral = tabHost.newTabSpec("MapaGeneral");
-        mapageneral.setIndicator("Mapa General", getResources().getDrawable(R.drawable.icon_photos_tab));
+        mapageneral.setIndicator("", getResources().getDrawable(R.drawable.google_maps));
         Intent mapaIntent = new Intent(this, MapaGeneral.class);
         mapageneral.setContent(mapaIntent);
         

@@ -11,7 +11,8 @@
        android:id="@+id/SplashImageView"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:src="@drawable/android">
+       android:src="@drawable/cajero_automatico"
+       android:contentDescription="@string/descripccion_imagen">
     </ImageView>
 
     <ProgressBar
