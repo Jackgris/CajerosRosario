@@ -54,6 +54,8 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
     private Button botonCentrarMapa;
     private Button botonCajerosBanelco;
     private Button botonCajerosLink;
+    private boolean seVenBanelco = false;
+    private boolean seVenRedLink = false;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -255,7 +257,19 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         botonCajerosBanelco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                agregarListaMarcadore(BANELCO);
+
+                if(seVenBanelco){
+                    mapa.clear();
+                    seVenBanelco = false;
+                    agregarMiPosicion();
+                    if(seVenRedLink){
+                        agregarListaMarcadore(LINK);
+                    }
+                }else {
+                    agregarListaMarcadore(BANELCO);
+                    seVenBanelco = true;
+                }
+
             }
         });
     }
@@ -267,7 +281,19 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         botonCajerosLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                agregarListaMarcadore(LINK);
+
+                if(seVenRedLink){
+                    seVenRedLink = false;
+                    mapa.clear();
+                    agregarMiPosicion();
+                    if(seVenBanelco){
+                        agregarListaMarcadore(BANELCO);
+                    }
+
+                }else{
+                    seVenRedLink = true;
+                    agregarListaMarcadore(LINK);
+                }
             }
         });
     }
@@ -302,7 +328,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
      * @return nos va a devolver un double con el valor de la distancia entre ambas ubicaciones
      * en cuadras de 100 metros
      */
-    public static double distanciasPuntos(LatLng StartP, LatLng EndP) {
+    private static double distanciasPuntos(LatLng StartP, LatLng EndP) {
 
         double lat1 = StartP.latitude;
         double lat2 = EndP.latitude;
@@ -320,5 +346,14 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
         // lo dividimos en 100 para pasarlo a cuadras de 100 metros
         return (6366000 * c) / 100;
+    }
+
+    private void agregarMiPosicion(){
+        if(location != null){
+
+            LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
+            mapa.addMarker(new MarkerOptions().position(miUbicacion).title(
+                    "Aquí es donde te encuentras"));
+        }
     }
 }
