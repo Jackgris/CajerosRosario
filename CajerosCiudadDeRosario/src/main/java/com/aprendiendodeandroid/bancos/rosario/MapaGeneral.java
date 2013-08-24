@@ -159,30 +159,41 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
         // armamos la ubicacion del marcador
         LatLng ubicacion  = new LatLng(cajero.getLatitud(), cajero.getLongitud());
+        LatLng miUbicacion = null;
 
+        if(location != null){
+            miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
+        }
+
+        String distancia = "";
+
+        if(miUbicacion != null){
+
+            Double metros = distanciasPuntos(miUbicacion, ubicacion);
+            distancia += " estas apróx. a " + metros.intValue() + " cuadras";
+        }
 
         if(cajero.getTipoCajero().trim().equals(DataBaseHelper.BANELCO)){
             // agregamos el marcador a nuestro mapa
             mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
-                    .snippet(cajero.getDireccion())
+                    .snippet(cajero.getDireccion() + distancia)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.banelco_icono)));
 
         }else if(cajero.getTipoCajero().trim().equals(DataBaseHelper.RED_LINK)){
             // agregamos el marcador a nuestro mapa
             mapa.addMarker(new MarkerOptions().position(ubicacion).title(nombre)
-                    .snippet(cajero.getDireccion())
+                    .snippet(cajero.getDireccion() + distancia)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_link_icono)));
         }
 
         if(location != null){
-            LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
 
             // configuramos la linea que se va a mostrar entre el cajero y nuestra ubicacion
             PolylineOptions dibujoLinea = new PolylineOptions();
             dibujoLinea.add(ubicacion);
             dibujoLinea.add(miUbicacion);
             dibujoLinea.width(2);
-            
+
             mapa.addPolyline(dibujoLinea);
         }
     }
@@ -282,5 +293,32 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
 
     public static void setLocation(Location location) {
         MapaGeneral.location = location;
+    }
+
+    /**
+     * Calcular distancia entre puntos
+     * @param StartP un objeto de tipo {@link LatLng} que representa la ubicacion inicial
+     * @param EndP un objeto de tipo {@link LatLng} que representa la ubicacion final
+     * @return nos va a devolver un double con el valor de la distancia entre ambas ubicaciones
+     * en cuadras de 100 metros
+     */
+    public static double distanciasPuntos(LatLng StartP, LatLng EndP) {
+
+        double lat1 = StartP.latitude;
+        double lat2 = EndP.latitude;
+        double lon1 = StartP.longitude;
+        double lon2 = EndP.longitude;
+
+        // obtenemos las diferencias entre latitud y longitud de los puntos
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLon = Math.toRadians(lon2-lon1);
+
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLon/2) * Math.sin(dLon/2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+
+        // lo dividimos en 100 para pasarlo a cuadras de 100 metros
+        return (6366000 * c) / 100;
     }
 }
