@@ -200,7 +200,7 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
             // FIXME agregar el calculo del tercer punto para formar  el triangulo y la ruta quede mejor
             PolylineOptions dibujoLinea = new PolylineOptions();
             dibujoLinea.add(ubicacion);
-            dibujoLinea.add(calcularTercerPunto(miUbicacion, ubicacion));
+//            dibujoLinea.add(calcularTercerPunto(miUbicacion, ubicacion));
             dibujoLinea.add(miUbicacion);
             dibujoLinea.width(2);
 
@@ -385,6 +385,10 @@ public class MapaGeneral extends android.support.v4.app.FragmentActivity {
         double lat3 = lat2 + s * (long1 - long2);
         double long3 = long2 + s * (lat2 - lat1);
 
-        return new LatLng(lat3, long3);
+        // FIXME para obtener correctamente este punto debo tener en cuenta la inclinacion de las
+        // calles en Rosario ademas de ver donde hay mayor diferencia, en la latitud o longitud
+
+//        return new LatLng(lat3, long3);
+        return new LatLng(lat1, long2);
     }
 }
